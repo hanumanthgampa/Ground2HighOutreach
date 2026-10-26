@@ -1,16 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const pipelineHighlights = [
+  {
+    title: "Start with the right accounts",
+    description:
+      "Define your ideal customer profile, research relevant accounts, and shape outreach around the people and signals that matter to your sales team.",
+    icon: "manage_search",
+  },
+  {
+    title: "Make each handoff useful",
+    description:
+      "Give your sales team helpful context about the account, the prospect, and the conversation so they can prepare for the next step.",
+    icon: "handshake",
+  },
+  {
+    title: "Learn and refine over time",
+    description:
+      "Review responses and campaign signals to understand what resonates, improve messaging, and focus effort on promising segments.",
+    icon: "query_stats",
+  },
+];
+
 export default function HomePage() {
-  const [hiddenFaqs, setHiddenFaqs] = useState<Set<number>>(() => new Set());
-  const toggleFaq = (index: number) => {
-    setHiddenFaqs((current) => {
-      const next = new Set(current);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
-      return next;
-    });
-  };
+  const [activeHighlight, setActiveHighlight] = useState(0);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setActiveHighlight((current) => (current + 1) % pipelineHighlights.length);
+    }, 6000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   return (
     <main className="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
@@ -52,8 +73,8 @@ export default function HomePage() {
 
 <div className="flex items-center gap-space-xs pt-space-xs text-on-surface-variant">
 <span className="material-symbols-outlined text-secondary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
-<span className="font-body-sm text-body-sm font-semibold text-primary">No long-term contracts.</span>
-<span className="font-body-sm text-body-sm">We grow only when you grow.</span>
+<span className="font-body-sm text-body-sm font-semibold text-primary">We grow only when you grow.</span>
+<span className="font-body-sm text-body-sm"></span>
 </div>
 
 <div className="pt-space-sm grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
@@ -198,13 +219,6 @@ export default function HomePage() {
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
             We combine rigorous account profiling, disciplined multi-touch orchestration, and thoughtful copy written for decision-makers. No spray-and-pray email blasts. No inflated vanity click metrics. Just consistent outbound execution into the accounts that move your enterprise needle.
           </p>
-<div className="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm">
-<span className="material-symbols-outlined text-secondary text-[28px]">speed</span>
-<div>
-<div className="font-headline-sm text-headline-sm text-primary">Think of us as the quiet engine.</div>
-<p className="font-body-sm text-body-sm text-on-surface-variant">We keep top-of-funnel velocity high and predictable while your closers focus entirely on deal velocity.</p>
-</div>
-</div>
 <div>
 <Link className="inline-flex items-center gap-space-xs font-headline-sm text-headline-sm text-primary hover:text-secondary transition-colors group" to="/approach">
 <span className="">See our structured approach</span>
@@ -269,13 +283,13 @@ export default function HomePage() {
 <div className="max-w-3xl space-y-space-xs">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm">
 <span className="material-symbols-outlined text-[14px]">tune</span>
-<span className="">Core Capabilities</span>
+<span className="">Core Expertise</span>
 </div>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
           From cold outreach to warm, ready-to-talk opportunities.
         </h2>
 <p className="font-body-lg text-body-lg text-on-surface-variant">
-          We design and run lead generation programs that match your specific sales motion, not someone else’s cookie-cutter playbook.
+          We design and run lead generation programs that match your sales motion, not someone else’s template. Here’s a quick glimpse before you dive into the details.
         </p>
 </div>
 
@@ -287,8 +301,7 @@ export default function HomePage() {
 <span className="material-symbols-outlined text-[26px]">forward_to_inbox</span>
 </div>
 <div>
-<span className="font-label-sm text-label-sm text-secondary font-bold">01 / Outbound Architecture</span>
-<h3 className="font-headline-lg text-headline-lg text-primary mt-1">Outbound that doesn’t feel robotic</h3>
+<h3 className="font-headline-lg text-headline-lg text-primary">Outbound that doesn’t feel robotic</h3>
 </div>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Carefully researched outbound campaigns that respect your buyer’s time, attention, and executive inbox.
@@ -321,8 +334,7 @@ export default function HomePage() {
 <span className="material-symbols-outlined text-[26px]">explore</span>
 </div>
 <div>
-<span className="font-label-sm text-label-sm text-on-tertiary-container font-bold">02 / Lead Orchestration</span>
-<h3 className="font-headline-lg text-headline-lg text-primary mt-1">Lead management with real follow-through</h3>
+<h3 className="font-headline-lg text-headline-lg text-primary">Lead management with real follow-through</h3>
 </div>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Leads are tracked, warmed, and handed over with rich tactical context—never dumped as a cold, contextless spreadsheet.
@@ -355,8 +367,7 @@ export default function HomePage() {
 <span className="material-symbols-outlined text-[26px]">insights</span>
 </div>
 <div>
-<span className="font-label-sm text-label-sm text-primary font-bold">03 / Analytics &amp; Compounding</span>
-<h3 className="font-headline-lg text-headline-lg text-primary mt-1">Clarity on what’s actually working</h3>
+<h3 className="font-headline-lg text-headline-lg text-primary">Clarity on what’s actually working</h3>
 </div>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Regular cadence reviews that clearly answer the strategic question: <em className="font-medium text-primary">“What do we double down on next month?”</em>
@@ -386,7 +397,7 @@ export default function HomePage() {
 
 <div className="flex items-center justify-center pt-space-xs">
 <Link className="inline-flex items-center gap-space-xs px-space-lg py-3 rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm hover:bg-secondary-container hover:text-primary transition-all shadow-sm" to="/services">
-<span className="">Explore all specialized outbound services</span>
+<span className="">Explore all services</span>
 <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
 </Link>
 </div>
@@ -404,7 +415,7 @@ export default function HomePage() {
 <span className="font-label-sm text-label-sm px-3 py-1 rounded-full bg-secondary-container/15 text-secondary font-semibold">
                 Client Snapshot
               </span>
-<span className="font-label-sm text-label-sm text-on-surface-variant">B2B SaaS · North America</span>
+<span className="font-label-sm text-label-sm text-on-surface-variant">B2B SaaS · Singapore &amp; Malaysia</span>
 <span className="font-label-sm text-label-sm text-on-surface-variant">· Sales-led motion</span>
 </div>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
@@ -417,7 +428,7 @@ export default function HomePage() {
               We clarified their high-conviction ICP, tore down generic messaging, and deployed a targeted multi-channel campaign into 800+ tier-1 accounts. Instead of chasing every lukewarm inbound, we zeroed in on high-fit organizations.
             </p>
 
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
+<div className="grid grid-cols-1 gap-space-sm pt-space-xs">
 <div className="p-space-sm rounded-xl bg-surface-container-low">
 <div className="flex items-center gap-space-xs text-secondary mb-1">
 <span className="material-symbols-outlined text-[20px]">event_repeat</span>
@@ -425,15 +436,6 @@ export default function HomePage() {
 </div>
 <p className="font-body-sm text-body-sm text-on-surface-variant">
                   A predictable stream of validated sales discussions booked weekly, eliminating the boom-and-bust cycle.
-                </p>
-</div>
-<div className="p-space-sm rounded-xl bg-surface-container-low">
-<div className="flex items-center gap-space-xs text-on-tertiary-container mb-1">
-<span className="material-symbols-outlined text-[20px]">filter_alt</span>
-<span className="font-headline-sm text-headline-sm text-primary">Cleaner pipeline</span>
-</div>
-<p className="font-body-sm text-body-sm text-on-surface-variant">
-                  Fewer unqualified tire-kickers; prospects already grasp value proposition before demo day.
                 </p>
 </div>
 </div>
@@ -465,98 +467,87 @@ export default function HomePage() {
 </section>
 
 <section className="w-full py-space-xl bg-surface">
-<div className="max-w-4xl mx-auto px-gutter space-y-space-lg">
-<div className="text-center space-y-space-xs">
-<span className="font-label-sm text-label-sm px-3 py-1 rounded-full bg-surface-container text-on-surface-variant uppercase tracking-wider">
-          Clarity &amp; Terms
+<div className="max-w-5xl mx-auto px-gutter">
+<div className="text-center space-y-space-xs mb-space-lg">
+<span className="font-label-sm text-label-sm px-3 py-1 rounded-full bg-secondary-container/20 text-secondary uppercase tracking-wider">
+          Our approach
         </span>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
-          Common questions on pipeline partnership
+          How we support your pipeline
         </h2>
 <p className="font-body-md text-body-md text-on-surface-variant">
-          Everything you need to know about ramp timeline, tech integration, and lead qualification.
+          A considered process from account research through campaign learning and refinement.
         </p>
 </div>
 
-<div className="space-y-space-sm" id="faq-list">
+<div
+  className="relative overflow-hidden rounded-3xl bg-primary p-space-lg text-on-primary shadow-xl sm:p-space-xl"
+  aria-roledescription="carousel"
+  aria-label="How G2H Outreach supports your pipeline"
+>
+  <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-secondary-container/20 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-28 -left-12 h-64 w-64 rounded-full bg-tertiary-fixed-dim/15 blur-3xl" />
+  <div className="relative flex min-h-64 flex-col items-center justify-center text-center sm:min-h-56">
+    <span className="material-symbols-outlined text-5xl text-secondary-container" aria-hidden="true">
+      {pipelineHighlights[activeHighlight].icon}
+    </span>
+    <div
+      key={activeHighlight}
+      className="mx-auto mt-space-sm max-w-3xl"
+      aria-live="polite"
+    >
+      <h3 className="font-headline-lg text-headline-lg leading-snug text-surface">
+        {pipelineHighlights[activeHighlight].title}
+      </h3>
+      <p className="mt-space-sm font-body-lg text-body-lg leading-relaxed text-on-primary-container">
+        {pipelineHighlights[activeHighlight].description}
+      </p>
+    </div>
+  </div>
 
-<div className="p-space-md rounded-xl bg-surface-container-low transition-colors duration-200">
-<button onClick={() => toggleFaq(0)} className="w-full flex items-center justify-between text-left font-headline-sm text-headline-sm text-primary focus:outline-none">
-<span className="">How fast can G2H deploy and start producing meetings?</span>
-<span className="material-symbols-outlined transition-transform duration-200 text-on-surface-variant">expand_more</span>
-</button>
-<div className={`mt-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed ${hiddenFaqs.has(0) ? "hidden" : ""}`}>
-            Our onboarding and technical setup (domain warmup, account research, list enrichment, and sequence drafting) typically takes 10 to 14 business days. Initial outbound starts reaching target buyers in week two, with executive responses following shortly after.
-          </div>
-</div>
-
-<div className="p-space-md rounded-xl bg-surface-container-low transition-colors duration-200">
-<button onClick={() => toggleFaq(1)} className="w-full flex items-center justify-between text-left font-headline-sm text-headline-sm text-primary focus:outline-none">
-<span className="">Are we locked into an inflexible annual commitment?</span>
-<span className="material-symbols-outlined transition-transform duration-200 text-on-surface-variant">expand_more</span>
-</button>
-<div className={`mt-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed ${hiddenFaqs.has(1) ? "hidden" : ""}`}>
-            No. We operate strictly on 3-to-6 month sprint structures. We believe long-term contracts hide poor execution. We earn your continued engagement by delivering calendar volume and transparent pipeline metrics every single month.
-          </div>
-</div>
-
-<div className="p-space-md rounded-xl bg-surface-container-low transition-colors duration-200">
-<button onClick={() => toggleFaq(2)} className="w-full flex items-center justify-between text-left font-headline-sm text-headline-sm text-primary focus:outline-none">
-<span className="">How do you protect our brand reputation in cold outreach?</span>
-<span className="material-symbols-outlined transition-transform duration-200 text-on-surface-variant">expand_more</span>
-</button>
-<div className={`mt-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed ${hiddenFaqs.has(2) ? "hidden" : ""}`}>
-            We avoid generic volume blasting. Every outbound cadence is hand-tailored to the recipient's tier, role, and industry context. We employ rigorous deliverability standards, dedicated secondary subdomains, and human-crafted email language that respects your market standing.
-          </div>
-</div>
-
-<div className="p-space-md rounded-xl bg-surface-container-low transition-colors duration-200">
-<button onClick={() => toggleFaq(3)} className="w-full flex items-center justify-between text-left font-headline-sm text-headline-sm text-primary focus:outline-none">
-<span className="">How do meetings get handed over to our account executives?</span>
-<span className="material-symbols-outlined transition-transform duration-200 text-on-surface-variant">expand_more</span>
-</button>
-<div className={`mt-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed ${hiddenFaqs.has(3) ? "hidden" : ""}`}>
-            Directly onto their native calendars (Google / Outlook / Calendly) with pre-meeting briefs detailing company size, current tech stack, specific pain points verified during the exchange, and a full thread history synced cleanly into your CRM.
-          </div>
-</div>
+  <div className="relative mt-space-lg flex items-center justify-center gap-space-sm">
+    <button
+      className="flex h-10 w-10 items-center justify-center rounded-full bg-surface/10 text-surface transition-colors hover:bg-surface/20 focus:outline-none focus:ring-2 focus:ring-secondary-container"
+      type="button"
+      aria-label="Previous highlight"
+      onClick={() =>
+        setActiveHighlight(
+          (current) => (current - 1 + pipelineHighlights.length) % pipelineHighlights.length,
+        )
+      }
+    >
+      <span className="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+    </button>
+    <div className="flex items-center gap-2" aria-label="Choose a highlight">
+      {pipelineHighlights.map((highlight, index) => (
+        <button
+          key={highlight.title}
+          className={`h-2.5 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-secondary-container focus:ring-offset-2 focus:ring-offset-primary ${
+            index === activeHighlight
+              ? "w-8 bg-secondary-container"
+              : "w-2.5 bg-surface/40 hover:bg-surface/70"
+          }`}
+          type="button"
+          aria-label={`Show highlight ${index + 1}`}
+          aria-current={index === activeHighlight ? "true" : undefined}
+          onClick={() => setActiveHighlight(index)}
+        />
+      ))}
+    </div>
+    <button
+      className="flex h-10 w-10 items-center justify-center rounded-full bg-surface/10 text-surface transition-colors hover:bg-surface/20 focus:outline-none focus:ring-2 focus:ring-secondary-container"
+      type="button"
+      aria-label="Next highlight"
+      onClick={() =>
+        setActiveHighlight((current) => (current + 1) % pipelineHighlights.length)
+      }
+    >
+      <span className="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+    </button>
+  </div>
 </div>
 </div>
 </section>
-
-<section className="w-full py-space-xl bg-surface">
-<div className="max-w-7xl mx-auto px-gutter">
-<div className="relative rounded-3xl bg-primary text-on-primary p-space-lg lg:p-space-xl overflow-hidden shadow-2xl">
-
-<div className="absolute -right-20 -bottom-20 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
-<div className="absolute -left-20 -top-20 w-96 h-96 bg-tertiary-fixed-dim/15 rounded-full blur-3xl pointer-events-none"></div>
-<div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
-<div className="lg:col-span-8 space-y-space-sm">
-<div className="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-primary-container text-secondary-fixed-dim font-label-sm text-label-sm">
-<span className="material-symbols-outlined text-[16px]">file_present</span>
-<span className="">Executive Briefing Document</span>
-</div>
-<h2 className="font-headline-xl text-headline-xl text-surface-bright tracking-tight">
-              G2H Outreach Overview (Deck)
-            </h2>
-<p className="font-body-lg text-body-lg text-on-primary-container max-w-2xl leading-relaxed">
-              A short, shareable executive summary of who we are, our research methodology, past performance metrics, and what it feels like to partner with our outbound team.
-            </p>
-</div>
-<div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-space-sm items-stretch lg:items-end">
-<a className="inline-flex items-center justify-center gap-space-xs px-space-lg py-3.5 rounded-full bg-secondary-container text-primary font-headline-sm text-headline-sm hover:brightness-110 active:scale-95 transition-all shadow-[0_8px_24px_rgba(254,152,50,0.35)]" href="mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview">
-<span className="material-symbols-outlined text-[20px]">download</span>
-<span className="">Request Overview (PPTX)</span>
-</a>
-<Link className="inline-flex items-center justify-center gap-space-xs px-space-lg py-3.5 rounded-full bg-surface-container-lowest text-primary font-headline-sm text-headline-sm hover:bg-surface-container-high transition-all" to="/contact">
-<span className="">Book a Strategy Call</span>
-<span className="material-symbols-outlined text-[18px]">calendar_month</span>
-</Link>
-</div>
-</div>
-</div>
-</div>
-</section>
-
 
 </div>
     </main>

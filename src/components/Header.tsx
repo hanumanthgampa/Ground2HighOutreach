@@ -44,13 +44,6 @@ export default function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-space-sm">
-          <a
-            className="hidden lg:inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low text-primary font-label-md text-label-md hover:bg-surface-container hover:text-primary transition-all shadow-[0_1px_6px_rgba(4,21,52,0.06)] border border-outline-variant/30"
-            href="mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview"
-          >
-            <span className="material-symbols-outlined text-[18px]">download</span>
-            <span>Request Overview</span>
-          </a>
           <Link
             className="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-105 active:scale-95 transition-all shadow-[0_8px_20px_rgba(254,152,50,0.28)]"
             to="/contact"

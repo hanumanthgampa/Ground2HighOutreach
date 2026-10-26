@@ -629,10 +629,6 @@ export default function ServicesPage() {
 <span className="">Book a Strategy Call</span>
 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
 </Link>
-<a className="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container-lowest/10 text-surface hover:bg-surface-container-lowest/20 font-headline-sm text-label-md transition-all border border-surface/20" href="mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview">
-<span className="material-symbols-outlined text-[18px]">download</span>
-<span className="">Request Overview (PPTX)</span>
-</a>
 </div>
 <div className="flex items-center gap-space-md text-on-primary-container font-label-sm text-label-sm pt-space-sm">
 <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> 30-Minute Executive Session</span>

@@ -34,7 +34,7 @@ For a deployed contact form, add `VITE_WEB3FORMS_ACCESS_KEY` to the hosting prov
 environment variables and trigger a fresh production build. Confirm the recipient email
 in Web3Forms and complete any required email verification before testing a real submission.
 
-The overview buttons open an email request because no overview deck file is included.
+The footer's overview link opens an email request because no overview deck file is included.
 Privacy, terms, and security routes are working drafts and are explicitly marked as not
 approved for publication. Replace the review checklists with approved content before launch.
 

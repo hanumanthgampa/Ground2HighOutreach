@@ -562,10 +562,6 @@ export default function ApproachPage() {
 <span className="">Book a Discovery Call</span>
 <span className="material-symbols-outlined text-[20px]">calendar_month</span>
 </Link>
-<a className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-space-xs px-space-md py-space-sm rounded-full bg-surface-container-high text-primary font-label-md text-label-md hover:bg-surface-container transition-all" href="mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview">
-<span className="material-symbols-outlined text-[18px]">download</span>
-<span className="">Request Deck</span>
-</a>
 </div>
 </div>
 </div>

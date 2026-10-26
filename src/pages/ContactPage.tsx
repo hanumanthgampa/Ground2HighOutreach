@@ -235,7 +235,7 @@ export default function ContactPage() {
 </div>
 <div className="min-w-0 flex-1">
 <p className="font-label-sm text-label-sm text-on-surface-variant">General &amp; Strategic Inquiries</p>
-<a className="text-primary font-semibold hover:text-secondary transition-colors truncate block" href="mailto:hello@g2hsolutions.com">hello@g2hsolutions.com</a>
+<a className="text-primary font-semibold hover:text-secondary transition-colors truncate block" href="mailto:sales@g2houtreach.com">sales@g2houtreach.com</a>
 </div>
 </div>
 <div className="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest/80 shadow-sm">
@@ -244,7 +244,7 @@ export default function ContactPage() {
 </div>
 <div className="min-w-0 flex-1">
 <p className="font-label-sm text-label-sm text-on-surface-variant">Campaign Architecture Desk</p>
-<a className="text-primary font-semibold hover:text-secondary transition-colors truncate block" href="mailto:outreach@g2hsolutions.com">outreach@g2hsolutions.com</a>
+<a className="text-primary font-semibold hover:text-secondary transition-colors truncate block" href="mailto:sales@g2houtreach.com">sales@g2houtreach.com</a>
 </div>
 </div>
 <div className="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest/80 shadow-sm">
@@ -262,25 +262,11 @@ export default function ContactPage() {
 </div>
 <div className="min-w-0 flex-1">
 <p className="font-label-sm text-label-sm text-on-surface-variant">Operating Base</p>
-<p className="text-primary font-semibold">North America &amp; Global Coverage</p>
+<p className="text-primary font-semibold">Singapore, Malaysia &amp; Global Coverage</p>
 </div>
 </div>
 </div>
 
-<div className="pt-space-xs">
-<a className="group block p-space-sm rounded-xl bg-primary text-on-primary hover:bg-primary-container transition-all shadow-md" href="mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview">
-<div className="flex items-center justify-between gap-space-xs">
-<div className="space-y-0.5">
-<span className="font-label-sm text-label-sm text-secondary-container uppercase tracking-wider">Review Offline</span>
-<p className="font-headline-sm text-headline-sm text-on-primary">Request the Executive Overview (PPTX)</p>
-<p className="font-body-sm text-body-sm text-on-primary-container">Short, shareable summary of methodology and unit economics.</p>
-</div>
-<div className="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center text-secondary-container group-hover:scale-110 transition-transform flex-shrink-0">
-<span className="material-symbols-outlined text-[20px]">download</span>
-</div>
-</div>
-</a>
-</div>
 </div>
 
 <div className="relative rounded-xl overflow-hidden shadow-lg h-48 bg-primary">
@@ -301,7 +287,7 @@ export default function ContactPage() {
 </div>
 <div className="mb-space-md">
 <span className="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wide">Project Feasibility &amp; Briefing</span>
-<h2 className="font-headline-lg text-headline-lg text-primary mt-1">Tell us about your pipeline target.</h2>
+<h2 className="font-headline-lg text-headline-lg text-primary mt-1">Tell us about your ICP target.</h2>
 <p className="font-body-md text-body-md text-on-surface-variant mt-1">
                 Provide basic details on your ICP and revenue goals. We’ll review account feasibility before we get on the phone.
               </p>
@@ -489,15 +475,12 @@ export default function ContactPage() {
             “It finally felt like someone owned our top-of-funnel.”
           </p>
 <p className="font-body-sm text-body-sm text-on-primary-container">
-            — VP of Sales, B2B SaaS Enterprise Client (EMEA &amp; North America)
+            — VP of Sales, B2B SaaS Enterprise Client (Singapore &amp; Malaysia)
           </p>
 </div>
 <div className="flex flex-col sm:flex-row items-center gap-space-sm flex-shrink-0 w-full sm:w-auto">
-<a className="w-full sm:w-auto px-space-md py-2.5 rounded-full bg-surface-container-low text-primary font-headline-sm text-label-md hover:bg-surface transition-all text-center" href="mailto:hello@g2hsolutions.com">
+<a className="w-full sm:w-auto px-space-md py-2.5 rounded-full bg-surface-container-low text-primary font-headline-sm text-label-md hover:bg-surface transition-all text-center" href="mailto:sales@g2houtreach.com">
             Email Us Directly
-          </a>
-<a className="w-full sm:w-auto px-space-md py-2.5 rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-105 transition-all text-center shadow-md" href="mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview">
-            Request Deck (.pptx)
           </a>
 </div>
 </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const overviewRequest =
-  "mailto:hello@g2hsolutions.com?subject=Request%20the%20G2H%20overview";
+  "mailto:sales@g2houtreach.com?subject=Request%20the%20G2H%20overview";
 
 export default function Footer() {
   return (
@@ -70,7 +70,7 @@ export default function Footer() {
                 </span>
                 <a
                   className="hover:text-surface transition-colors"
-                  href="mailto:outreach@g2hsolutions.com"
+                  href="mailto:sales@g2houtreach.com"
                 >
                   Pipeline Diagnostic Inquiry
                 </a>
@@ -87,21 +87,48 @@ export default function Footer() {
           <div className="space-y-space-sm">
             <p className="font-headline-sm text-headline-sm text-surface">Executive Connect</p>
             <p className="font-body-sm text-body-sm text-on-primary-container">
-              Partnering with B2B founders and enterprise revenue teams across EMEA and North
-              America.
+              Partnering with B2B founders and enterprise revenue teams in Singapore, Malaysia,
+              and around the world.
             </p>
-            <a
-              aria-label="Direct inquiries by email"
-              className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary hover:bg-secondary-container hover:text-primary transition-colors"
-              href="mailto:hello@g2hsolutions.com"
-            >
-              <span className="material-symbols-outlined text-[18px]">mail</span>
-            </a>
+            <div className="flex items-center gap-space-xs">
+              <span
+                aria-label="LinkedIn"
+                className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary"
+                role="img"
+              >
+                <svg aria-hidden="true" className="h-[18px] w-[18px] fill-current" viewBox="0 0 24 24">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.34 17.5V9.88H5.8v7.62h2.54ZM7.07 8.84c.84 0 1.36-.56 1.36-1.26-.02-.72-.52-1.27-1.34-1.27s-1.36.55-1.36 1.27c0 .7.52 1.26 1.32 1.26h.02Zm5.18 8.66v-4.26c0-.23.02-.46.09-.63.18-.46.59-.94 1.28-.94.9 0 1.26.7 1.26 1.72v4.11h2.54v-4.37c0-2.34-1.25-3.43-2.92-3.43-1.35 0-1.95.75-2.29 1.27v-1.09H9.67c.03.72 0 7.62 0 7.62h2.58Z" />
+                </svg>
+              </span>
+              <a
+                aria-label="Direct inquiries by email"
+                className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary hover:bg-secondary-container hover:text-primary transition-colors"
+                href="mailto:sales@g2houtreach.com"
+              >
+                <span className="material-symbols-outlined text-[18px]">mail</span>
+              </a>
+              <span
+                aria-label="Instagram"
+                className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-[18px] w-[18px] fill-none stroke-current"
+                  strokeWidth="1.8"
+                  viewBox="0 0 24 24"
+                >
+                  <rect height="16" rx="4.5" width="16" x="4" y="4" />
+                  <circle cx="12" cy="12" r="3.5" />
+                  <circle cx="17.5" cy="6.8" fill="currentColor" r="1" stroke="none" />
+                </svg>
+              </span>
+            </div>
           </div>
         </div>
 
         <div className="pt-space-md border-t border-outline/10 flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-md text-label-md text-on-primary-container">
-          <p>© {new Date().getFullYear()} G2H Outreach. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} G2H Outreach Private Limited. All rights reserved.</p>
           <div className="flex items-center gap-space-md">
             <Link className="hover:text-surface transition-colors" to="/privacy">
               Privacy Policy
