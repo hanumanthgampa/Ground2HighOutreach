@@ -36,7 +36,7 @@ export default function HomePage() {
 </h1>
 
 <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
-            G2H Solutions plugs into your sales team as a hands-on lead generation partner. We help you isolate high-value enterprise accounts, spark authentic conversations, and fill calendars with meetings that are actually worth taking.
+            G2H Outreach plugs into your sales team as a hands-on lead generation partner. We help you isolate high-value enterprise accounts, spark authentic conversations, and fill calendars with meetings that are actually worth taking.
           </p>
 
 <div className="pt-space-xs flex flex-wrap items-center gap-space-sm">
@@ -77,7 +77,7 @@ export default function HomePage() {
 <div className="font-label-sm text-label-sm uppercase tracking-wider text-secondary">What We Focus On</div>
 <div className="font-headline-md text-headline-md text-primary mt-0.5">Meetings booked</div>
 <p className="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
-                  Not clicks, not vanity leads, real executive conversations.
+                  Not clicks or vanity leads—real executive conversations.
                 </p>
 </div>
 </div>
@@ -187,13 +187,13 @@ export default function HomePage() {
 <div className="lg:col-span-7 space-y-space-md">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container/15 text-secondary font-label-sm text-label-sm">
 <span className="material-symbols-outlined text-[14px]">psychology</span>
-<span className="">Why G2H Exists</span>
+<span className="">Why G2H Outreach Exists</span>
 </div>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
             Built for teams who are tired of “leads” that never become conversations.
           </h2>
 <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-            If you’ve ever opened an inbound lead export or agency handover sheet and quietly thought, <em className="text-primary font-medium">“Who are these people and why are we talking to them?”</em>, you’re not alone. G2H Solutions was created to eliminate exactly that friction point.
+            If you’ve ever opened an inbound lead export or agency handover sheet and quietly thought, <em className="text-primary font-medium">“Who are these people and why are we talking to them?”</em>, you’re not alone. G2H Outreach was created to eliminate exactly that friction point.
           </p>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
             We combine rigorous account profiling, disciplined multi-touch orchestration, and thoughtful copy written for decision-makers. No spray-and-pray email blasts. No inflated vanity click metrics. Just consistent outbound execution into the accounts that move your enterprise needle.
@@ -486,7 +486,7 @@ export default function HomePage() {
 <span className="material-symbols-outlined transition-transform duration-200 text-on-surface-variant">expand_more</span>
 </button>
 <div className={`mt-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed ${hiddenFaqs.has(0) ? "hidden" : ""}`}>
-            Our onboarding and technical setup (domain heating, account scraping, list enrichment, and sequence drafting) typically takes 10 to 14 business days. Initial outbound starts reaching target buyers in week two, with warm executive responses rolling in shortly after.
+            Our onboarding and technical setup (domain warmup, account research, list enrichment, and sequence drafting) typically takes 10 to 14 business days. Initial outbound starts reaching target buyers in week two, with executive responses following shortly after.
           </div>
 </div>
 
@@ -536,7 +536,7 @@ export default function HomePage() {
 <span className="">Executive Briefing Document</span>
 </div>
 <h2 className="font-headline-xl text-headline-xl text-surface-bright tracking-tight">
-              G2H Solutions Overview (Deck)
+              G2H Outreach Overview (Deck)
             </h2>
 <p className="font-body-lg text-body-lg text-on-primary-container max-w-2xl leading-relaxed">
               A short, shareable executive summary of who we are, our research methodology, past performance metrics, and what it feels like to partner with our outbound team.

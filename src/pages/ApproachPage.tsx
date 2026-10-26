@@ -352,7 +352,7 @@ export default function ApproachPage() {
 <span className="material-symbols-outlined text-[22px]">check</span>
 </div>
 <div>
-<p className="font-headline-sm text-headline-sm text-surface">The G2H Solutions Way</p>
+<p className="font-headline-sm text-headline-sm text-surface">The G2H Outreach Way</p>
 <p className="font-body-sm text-body-sm text-on-primary-container">Precision targeting &amp; embedded sales partnership</p>
 </div>
 </div>

@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-space-sm">
             <div className="flex items-center gap-space-xs">
               <span className="font-headline-md text-headline-md text-surface tracking-tight">
-                G2H Solutions
+                G2H Outreach
               </span>
             </div>
             <p className="font-body-sm text-body-sm text-on-primary-container leading-relaxed">
@@ -101,7 +101,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-space-md border-t border-outline/10 flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-md text-label-md text-on-primary-container">
-          <p>© {new Date().getFullYear()} G2H Solutions. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} G2H Outreach. All rights reserved.</p>
           <div className="flex items-center gap-space-md">
             <Link className="hover:text-surface transition-colors" to="/privacy">
               Privacy Policy

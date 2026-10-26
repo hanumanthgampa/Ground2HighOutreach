@@ -1,21 +1,114 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 export default function ContactPage() {
   const [selectedDay, setSelectedDay] = useState(8);
   const [selectedSlot, setSelectedSlot] = useState("1:30 PM");
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormSubmitted(true);
+    setSubmitError("");
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError("The contact form is not configured yet. Please email us directly.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const formData = new FormData(event.currentTarget);
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          ...Object.fromEntries(formData.entries()),
+          subject: "New G2H Outreach contact request",
+          from_name: "G2H Outreach Website",
+        }),
+      });
+      const result: unknown = await response.json();
+      const succeeded =
+        typeof result === "object" &&
+        result !== null &&
+        "success" in result &&
+        result.success === true;
+      const providerMessage =
+        typeof result === "object" &&
+        result !== null &&
+        "message" in result &&
+        typeof result.message === "string"
+          ? result.message
+          : "";
+
+      if (!response.ok || !succeeded) {
+        setSubmitError(providerMessage || "We couldn't send your request. Please try again.");
+        return;
+      }
+
+      formRef.current?.reset();
+      setShowSuccessToast(true);
+    } catch (error: unknown) {
+      setSubmitError(
+        error instanceof TypeError
+          ? "We couldn't connect to the form service. Please try again."
+          : "We received an unreadable response from the form service. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-  const resetForm = () => {
-    formRef.current?.reset();
-    setFormSubmitted(false);
-  };
+  useEffect(() => {
+    if (!showSuccessToast) return;
+
+    const timeoutId = window.setTimeout(() => setShowSuccessToast(false), 5000);
+    return () => window.clearTimeout(timeoutId);
+  }, [showSuccessToast]);
 
   return (
     <main className="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
+      {showSuccessToast && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-primary/35 p-4 backdrop-blur-sm">
+          <div
+            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-br from-white via-[#fff8ee] to-[#fff0dc] px-7 py-10 text-center shadow-[0_24px_80px_rgba(4,21,52,0.28)] sm:px-12 sm:py-14"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-secondary-container/25 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-tertiary-container/20 blur-3xl" />
+            <button
+              className="absolute right-4 top-4 rounded-full p-2 text-on-surface-variant transition-colors hover:bg-primary/5"
+              type="button"
+              aria-label="Dismiss notification"
+              onClick={() => setShowSuccessToast(false)}
+            >
+              <span className="material-symbols-outlined text-[22px]" aria-hidden="true">
+                close
+              </span>
+            </button>
+            <div className="relative mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#fe9832] to-[#ffbd66] text-white shadow-lg shadow-[#fe9832]/30">
+              <span className="material-symbols-outlined text-[44px]" aria-hidden="true">
+                check
+              </span>
+            </div>
+            <p className="relative mb-2 font-label-sm text-label-sm font-bold uppercase tracking-[0.2em] text-secondary">
+              Message delivered
+            </p>
+            <h2 className="relative font-headline-xl text-headline-xl text-primary">
+              Thank you for reaching out!
+            </h2>
+            <p className="relative mx-auto mt-3 max-w-sm font-body-md text-body-md leading-relaxed text-on-surface-variant">
+              Your request has been sent successfully. Our team will follow up using the email you provided.
+            </p>
+          </div>
+        </div>
+      )}
       <div className="flex flex-col w-full">
 
 <section className="relative w-full overflow-hidden pb-space-xl">
@@ -215,19 +308,19 @@ export default function ContactPage() {
 </div>
 
 <form className="space-y-space-md" id="contactScopingForm" ref={formRef} onSubmit={handleSubmit}>
-
+<input className="hidden" name="botcheck" tabIndex={-1} type="checkbox" />
 <div className="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
 <div className="space-y-1">
 <label className="block font-label-md text-label-md text-primary font-semibold" htmlFor="fullName">
                     Full Name <span className="text-error">*</span>
 </label>
-<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="fullName" placeholder="e.g. Jordan Miller" required type="text" />
+<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="fullName" name="name" placeholder="e.g. Jordan Miller" required type="text" />
 </div>
 <div className="space-y-1">
 <label className="block font-label-md text-label-md text-primary font-semibold" htmlFor="businessEmail">
                     Business Email <span className="text-error">*</span>
 </label>
-<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="businessEmail" placeholder="jordan@company.com" required type="email" />
+<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="businessEmail" name="email" placeholder="jordan@company.com" required type="email" />
 </div>
 </div>
 
@@ -236,13 +329,13 @@ export default function ContactPage() {
 <label className="block font-label-md text-label-md text-primary font-semibold" htmlFor="companyName">
                     Company Name <span className="text-error">*</span>
 </label>
-<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="companyName" placeholder="Acme Technologies" required type="text" />
+<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="companyName" name="company" placeholder="Acme Technologies" required type="text" />
 </div>
 <div className="space-y-1">
 <label className="block font-label-md text-label-md text-primary font-semibold" htmlFor="websiteUrl">
                     Website URL
                   </label>
-<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="websiteUrl" placeholder="https://acme.io" type="url" />
+<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="websiteUrl" name="website" placeholder="https://acme.io" type="url" />
 </div>
 </div>
 
@@ -251,7 +344,7 @@ export default function ContactPage() {
                   Current Monthly Qualified Meetings Goal <span className="text-error">*</span>
 </label>
 <div className="relative">
-<select defaultValue="" className="w-full appearance-none px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all pr-10 cursor-pointer" id="meetingTarget" required>
+<select defaultValue="" className="w-full appearance-none px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all pr-10 cursor-pointer" id="meetingTarget" name="meetings_goal" required>
 <option disabled value="">Select your desired pipeline volume...</option>
 <option value="5-10">5 – 10 high-value executive meetings / month</option>
 <option value="10-25">10 – 25 mid-market / enterprise meetings / month</option>
@@ -270,7 +363,7 @@ export default function ContactPage() {
                   </label>
 <span className="font-label-sm text-label-sm text-on-surface-variant">e.g., Series B+ FinTech, VP of Risk</span>
 </div>
-<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="targetIcp" placeholder="Who are your ideal buyers? Industries, job titles, geography" type="text" />
+<input className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all" id="targetIcp" name="target_market" placeholder="Who are your ideal buyers? Industries, job titles, geography" type="text" />
 </div>
 
 
@@ -279,33 +372,26 @@ export default function ContactPage() {
 <label className="block font-label-md text-label-md text-primary font-semibold" htmlFor="formMessage">
                   Specific Outbound Requirements or Context
                 </label>
-<textarea className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all resize-y" id="formMessage" placeholder="Tell us about your average deal size, past outbound tests, or specific timeline constraints..." rows={3}></textarea>
+<textarea className="w-full px-space-sm py-2.5 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md placeholder:text-outline-variant focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#fe9832] transition-all resize-y" id="formMessage" name="message" placeholder="Tell us about your average deal size, past outbound tests, or specific timeline constraints..." rows={3}></textarea>
 </div>
 
+{submitError && (
+  <p className="font-body-sm text-body-sm text-error" role="alert">
+    {submitError}
+  </p>
+)}
 <div className="pt-2">
-<button className="w-full py-3.5 px-space-md rounded-full bg-secondary-container text-primary font-headline-sm text-headline-sm hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-center gap-space-xs shadow-[0_10px_25px_rgba(254,152,50,0.32)]" type="submit">
-<span className="">Submit &amp; Request Strategy Session</span>
+<button className="w-full py-3.5 px-space-md rounded-full bg-secondary-container text-primary font-headline-sm text-headline-sm hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-center gap-space-xs shadow-[0_10px_25px_rgba(254,152,50,0.32)] disabled:cursor-wait disabled:opacity-60" disabled={isSubmitting} type="submit">
+<span className="">{isSubmitting ? "Sending your request..." : "Submit & Request Strategy Session"}</span>
 <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
 </button>
 </div>
 
 <p className="font-body-sm text-body-sm text-center text-on-surface-variant/80">
-                🔒 Enterprise confidentiality guaranteed. We never resell your ICP data or initiate outreach without formal mutual signoff.
+                We’ll use your details to review your request and get back to you.
               </p>
 </form>
 
-<div className={`absolute inset-0 bg-surface-container-lowest/98 backdrop-blur-md rounded-2xl p-space-lg flex flex-col items-center justify-center text-center ${formSubmitted ? "" : "hidden"}`} id="formSuccessMessage">
-<div className="w-16 h-16 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary mb-space-sm">
-<span className="material-symbols-outlined text-[36px]">check_circle</span>
-</div>
-<h3 className="font-headline-lg text-headline-lg text-primary mb-2">Request Received</h3>
-<p className="font-body-md text-body-md text-on-surface-variant max-w-md mb-space-md leading-relaxed">
-                Thank you! Our revenue architecture lead is analyzing your ICP targets and will follow up with initial market insights within 2 business hours.
-              </p>
-<button className="px-space-md py-2 rounded-full bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors" id="resetFormBtn" type="button" onClick={resetForm}>
-                Submit Another Request
-              </button>
-</div>
 </div>
 </div>
 </div>

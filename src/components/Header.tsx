@@ -20,10 +20,12 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_10px_rgba(4,21,52,0.06)]">
       <div className="relative h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md">
         <div className="flex items-center gap-space-sm">
-          <Link className="flex items-center gap-space-xs" to="/" aria-label="G2H Solutions home">
-            <span className="font-headline-md text-headline-md font-extrabold tracking-tight text-primary">
-              G2H Solutions
-            </span>
+          <Link className="flex min-w-0 items-center" to="/" aria-label="G2H Outreach home">
+            <img
+              className="h-14 w-auto max-w-[min(58vw,14rem)] object-contain md:h-16 md:max-w-[min(58vw,18rem)] lg:h-24 lg:max-w-[min(58vw,26rem)]"
+              src="/images/g2h-outreach-logo.png"
+              alt="G2H Outreach — Your B2B Lead Gen Partner"
+            />
           </Link>
         </div>
         <nav

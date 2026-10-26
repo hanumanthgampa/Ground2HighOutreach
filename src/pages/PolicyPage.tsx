@@ -10,7 +10,7 @@ const policies: Record<Policy, PolicyContent> = {
   privacy: {
     title: "Privacy Policy",
     introduction:
-      "This draft identifies the privacy disclosures that must be confirmed before publication. Replace these review notes with G2H Solutions' approved practices and applicable legal requirements.",
+      "This draft identifies the privacy disclosures that must be confirmed before publication. Replace these review notes with G2H Outreach's approved practices and applicable legal requirements.",
     sections: [
       {
         heading: "Who operates this site",
@@ -29,7 +29,8 @@ const policies: Record<Policy, PolicyContent> = {
       {
         heading: "Use, sharing, and storage",
         details: [
-          "Identify the service providers and other recipients that may process information, including hosting, email, scheduling, and analytics providers.",
+          "The contact form uses Web3Forms to process submissions and forward them to the configured recipient. Confirm the provider's current privacy, retention, and data-location details before publication.",
+          "Identify other service providers and recipients that may process information, including hosting, scheduling, and analytics providers.",
           "Specify retention periods, storage locations, and any international transfers and safeguards.",
         ],
       },
@@ -45,7 +46,7 @@ const policies: Record<Policy, PolicyContent> = {
   terms: {
     title: "Terms of Service",
     introduction:
-      "This draft is a review checklist, not an agreement for public use. Replace it with terms approved for G2H Solutions and its intended customers before publication.",
+      "This draft is a review checklist, not an agreement for public use. Replace it with terms approved for G2H Outreach and its intended customers before publication.",
     sections: [
       {
         heading: "Organization and scope",

@@ -22,7 +22,7 @@ export default function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    document.title = `G2H Solutions | ${pageTitles[pathname] ?? "Home"}`;
+    document.title = `G2H Outreach | ${pageTitles[pathname] ?? "Home"}`;
     window.scrollTo(0, 0);
   }, [pathname]);
 

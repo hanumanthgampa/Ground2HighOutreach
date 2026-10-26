@@ -273,7 +273,7 @@ export default function ServicesPage() {
               Synchronized Round-Robin Calendars
             </div>
 <p className="font-body-sm text-body-sm text-on-surface-variant">
-              Direct calendar bookings directly into your AEs' native calendars according to territory, vertical, or availability constraints.
+              Meetings are booked directly on your AEs' calendars according to territory, vertical, or availability constraints.
             </p>
 </div>
 <div className="p-space-sm rounded-lg bg-surface-container-low space-y-1">
