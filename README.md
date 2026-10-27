@@ -23,6 +23,10 @@ npm run preview
 
 Routes: `/`, `/services`, `/approach`, and `/contact`.
 
+The production build lazy-loads secondary page routes, uses optimized WebP imagery,
+and includes page-specific titles and descriptions plus Open Graph metadata. Set the
+final site domain before adding canonical URLs and a sitemap for search indexing.
+
 ## Deployment
 
 The production build is written to `dist/`. Netlify's SPA fallback is configured in

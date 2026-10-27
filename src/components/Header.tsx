@@ -23,8 +23,13 @@ export default function Header() {
           <Link className="flex min-w-0 items-center" to="/" aria-label="G2H Outreach home">
             <img
               className="h-14 w-auto max-w-[min(58vw,14rem)] object-contain md:h-16 md:max-w-[min(58vw,18rem)] lg:h-24 lg:max-w-[min(58vw,26rem)]"
-              src="/images/g2h-outreach-logo.png"
+              src="/images/g2h-outreach-logo.webp"
               alt="G2H Outreach — Your B2B Lead Gen Partner"
+              width="1200"
+              height="436"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </Link>
         </div>

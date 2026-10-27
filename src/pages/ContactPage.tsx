@@ -1,12 +1,106 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
+const meetingTimeZone = "Asia/Singapore";
+const meetingSlots = ["10:00 AM", "1:30 PM", "3:00 PM"];
+const singaporeDateFormatter = new Intl.DateTimeFormat("en-CA", {
+  timeZone: meetingTimeZone,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+function getSingaporeDateKey(date = new Date()) {
+  const parts = singaporeDateFormatter.formatToParts(date);
+  const year = parts.find((part) => part.type === "year")?.value;
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+  return `${year}-${month}-${day}`;
+}
+
+function dateFromKey(dateKey: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+function dateKeyFromDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function addDays(dateKey: string, days: number) {
+  const date = dateFromKey(dateKey);
+  date.setUTCDate(date.getUTCDate() + days);
+  return dateKeyFromDate(date);
+}
+
+function monthStart(date: Date) {
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1));
+}
+
+function monthKey(date: Date) {
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
+}
+
+function formatCalendarDate(dateKey: string, options: Intl.DateTimeFormatOptions) {
+  return new Intl.DateTimeFormat("en-SG", { ...options, timeZone: "UTC" }).format(
+    dateFromKey(dateKey),
+  );
+}
+
+function getCalendarCells(month: Date) {
+  const year = month.getUTCFullYear();
+  const monthIndex = month.getUTCMonth();
+  const daysInMonth = new Date(Date.UTC(year, monthIndex + 1, 0)).getUTCDate();
+  const mondayOffset = (new Date(Date.UTC(year, monthIndex, 1)).getUTCDay() + 6) % 7;
+  const cells: Array<{ dateKey: string; day: number } | null> = Array(mondayOffset).fill(null);
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    cells.push({
+      dateKey: dateKeyFromDate(new Date(Date.UTC(year, monthIndex, day))),
+      day,
+    });
+  }
+
+  while (cells.length % 7 !== 0) cells.push(null);
+  return cells;
+}
+
 export default function ContactPage() {
-  const [selectedDay, setSelectedDay] = useState(8);
-  const [selectedSlot, setSelectedSlot] = useState("1:30 PM");
+  const [todayDateKey] = useState(getSingaporeDateKey);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState("");
+  const [calendarMonth, setCalendarMonth] = useState(() =>
+    monthStart(dateFromKey(getSingaporeDateKey())),
+  );
+  const [meetingPreferenceAdded, setMeetingPreferenceAdded] = useState(false);
+  const maxDateKey = addDays(todayDateKey, 90);
+  const calendarCells = getCalendarCells(calendarMonth);
+  const earliestMonth = monthStart(dateFromKey(todayDateKey));
+  const latestMonth = monthStart(dateFromKey(maxDateKey));
+  const canGoToPreviousMonth = monthKey(calendarMonth) > monthKey(earliestMonth);
+  const canGoToNextMonth = monthKey(calendarMonth) < monthKey(latestMonth);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const changeCalendarMonth = (monthOffset: number) => {
+    const nextMonth = new Date(
+      Date.UTC(
+        calendarMonth.getUTCFullYear(),
+        calendarMonth.getUTCMonth() + monthOffset,
+        1,
+      ),
+    );
+    setCalendarMonth(nextMonth);
+    if (selectedDate && monthKey(dateFromKey(selectedDate)) !== monthKey(nextMonth)) {
+      setSelectedDate("");
+      setSelectedSlot("");
+      setMeetingPreferenceAdded(false);
+    }
+  };
+  const addMeetingPreferenceToRequest = () => {
+    setMeetingPreferenceAdded(true);
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitError("");
@@ -29,6 +123,7 @@ export default function ContactPage() {
         body: JSON.stringify({
           access_key: accessKey,
           ...Object.fromEntries(formData.entries()),
+          timezone: "Singapore Time (SGT / MYT, UTC+8)",
           subject: "New G2H Outreach contact request",
           from_name: "G2H Outreach Website",
         }),
@@ -104,7 +199,7 @@ export default function ContactPage() {
               Thank you for reaching out!
             </h2>
             <p className="relative mx-auto mt-3 max-w-sm font-body-md text-body-md leading-relaxed text-on-surface-variant">
-              Your request has been sent successfully. Our team will follow up using the email you provided.
+              Your request has been sent. If you included a preferred time, our team will confirm availability by email.
             </p>
           </div>
         </div>
@@ -163,19 +258,33 @@ export default function ContactPage() {
 <span className="">Direct Strategy Call</span>
 </div>
 <h3 className="font-headline-md text-headline-md text-primary">Schedule a 30-Minute Call</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant">Real-time calendar access. Pick your strategic time slot.</p>
+<p className="font-body-sm text-body-sm text-on-surface-variant">Choose a preferred time. We’ll confirm availability by email.</p>
 </div>
 <span className="px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm uppercase font-semibold">30 Min</span>
 </div>
 
 <div className="bg-surface-container-low rounded-lg p-space-sm">
 <div className="flex items-center justify-between mb-space-xs px-1">
-<span className="font-headline-sm text-headline-sm text-primary">October 2025</span>
+<span className="font-headline-sm text-headline-sm text-primary" aria-live="polite">
+  {new Intl.DateTimeFormat("en-SG", { month: "long", year: "numeric", timeZone: "UTC" }).format(calendarMonth)}
+</span>
 <div className="flex items-center gap-1 text-on-surface-variant">
-<button aria-label="Previous Month" className="p-1 rounded hover:bg-surface-container transition-colors" type="button">
+<button
+  aria-label="Previous Month"
+  className="p-1 rounded hover:bg-surface-container transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+  disabled={!canGoToPreviousMonth}
+  onClick={() => changeCalendarMonth(-1)}
+  type="button"
+>
 <span className="material-symbols-outlined text-[18px]">chevron_left</span>
 </button>
-<button aria-label="Next Month" className="p-1 rounded hover:bg-surface-container transition-colors" type="button">
+<button
+  aria-label="Next Month"
+  className="p-1 rounded hover:bg-surface-container transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+  disabled={!canGoToNextMonth}
+  onClick={() => changeCalendarMonth(1)}
+  type="button"
+>
 <span className="material-symbols-outlined text-[18px]">chevron_right</span>
 </button>
 </div>
@@ -185,45 +294,93 @@ export default function ContactPage() {
 <span className="">Mo</span><span className="">Tu</span><span className="">We</span><span className="">Th</span><span className="">Fr</span><span className="">Sa</span><span className="">Su</span>
 </div>
 <div className="grid grid-cols-7 gap-1 text-center font-label-md text-label-md" id="calendarDays">
-<span className="py-1 text-on-surface-variant/30">29</span>
-<span className="py-1 text-on-surface-variant/30">30</span>
-<button onClick={() => setSelectedDay(1)} className={selectedDay === 1 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">1</button>
-<button onClick={() => setSelectedDay(2)} className={selectedDay === 2 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">2</button>
-<button onClick={() => setSelectedDay(3)} className={selectedDay === 3 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">3</button>
-<span className="py-1 text-on-surface-variant/40">4</span>
-<span className="py-1 text-on-surface-variant/40">5</span>
-<button onClick={() => setSelectedDay(6)} className={selectedDay === 6 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">6</button>
-<button onClick={() => setSelectedDay(7)} className={selectedDay === 7 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">7</button>
-<button onClick={() => setSelectedDay(8)} className={selectedDay === 8 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">8</button>
-<button onClick={() => setSelectedDay(9)} className={selectedDay === 9 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">9</button>
-<button onClick={() => setSelectedDay(10)} className={selectedDay === 10 ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm" : "py-1 rounded hover:bg-surface-container-high transition-colors"} type="button">10</button>
-<span className="py-1 text-on-surface-variant/40">11</span>
-<span className="py-1 text-on-surface-variant/40">12</span>
+{calendarCells.map((cell, index) => {
+  if (!cell) return <span aria-hidden="true" className="py-1" key={`empty-${index}`} />;
+  const weekday = dateFromKey(cell.dateKey).getUTCDay();
+  const unavailable =
+    cell.dateKey <= todayDateKey ||
+    cell.dateKey > maxDateKey ||
+    weekday === 0 ||
+    weekday === 6;
+  const isSelected = selectedDate === cell.dateKey;
+
+  return (
+    <button
+      aria-label={formatCalendarDate(cell.dateKey, {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })}
+      aria-pressed={isSelected}
+      className={
+        isSelected
+          ? "py-1 rounded bg-primary text-on-primary font-semibold shadow-sm"
+          : "py-1 rounded hover:bg-surface-container-high transition-colors disabled:text-on-surface-variant/30 disabled:hover:bg-transparent disabled:cursor-not-allowed"
+      }
+      disabled={unavailable}
+      key={cell.dateKey}
+      onClick={() => {
+        setSelectedDate(cell.dateKey);
+        setSelectedSlot("");
+        setMeetingPreferenceAdded(false);
+      }}
+      type="button"
+    >
+      {cell.day}
+    </button>
+  );
+})}
 </div>
 </div>
 
 <div className="space-y-space-xs">
 <div className="flex items-center justify-between">
-<label className="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Available Slots (Wed, Oct 8)</label>
-<span className="font-label-sm text-label-sm text-secondary font-medium">Eastern Time (US)</span>
+<label className="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">
+  {selectedDate ? `Preferred time (${formatCalendarDate(selectedDate, { weekday: "short", day: "numeric", month: "short" })})` : "Select a date first"}
+</label>
+<span className="font-label-sm text-label-sm text-secondary font-medium">SGT / MYT (UTC+8)</span>
 </div>
 <div className="grid grid-cols-3 gap-2" id="slotPicker">
-<button onClick={() => setSelectedSlot("10:00 AM")} className={selectedSlot === "10:00 AM" ? "py-2 px-1 text-center rounded-lg bg-secondary-container text-primary font-label-md text-label-md font-bold shadow-sm ring-2 ring-secondary-container" : "py-2 px-1 text-center rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md transition-all active:scale-95 shadow-sm"} type="button">
-                  10:00 AM
-                </button>
-<button onClick={() => setSelectedSlot("1:30 PM")} className={selectedSlot === "1:30 PM" ? "py-2 px-1 text-center rounded-lg bg-secondary-container text-primary font-label-md text-label-md font-bold shadow-sm ring-2 ring-secondary-container" : "py-2 px-1 text-center rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md transition-all active:scale-95 shadow-sm"} type="button">
-                  1:30 PM
-                </button>
-<button onClick={() => setSelectedSlot("3:00 PM")} className={selectedSlot === "3:00 PM" ? "py-2 px-1 text-center rounded-lg bg-secondary-container text-primary font-label-md text-label-md font-bold shadow-sm ring-2 ring-secondary-container" : "py-2 px-1 text-center rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md transition-all active:scale-95 shadow-sm"} type="button">
-                  3:00 PM
-                </button>
+{meetingSlots.map((slot) => (
+  <button
+    aria-pressed={selectedSlot === slot}
+    className={
+      selectedSlot === slot
+        ? "py-2 px-1 text-center rounded-lg bg-secondary-container text-primary font-label-md text-label-md font-bold shadow-sm ring-2 ring-secondary-container"
+        : "py-2 px-1 text-center rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md transition-all active:scale-95 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+    }
+    disabled={!selectedDate}
+    key={slot}
+    onClick={() => {
+      setSelectedSlot(slot);
+      setMeetingPreferenceAdded(false);
+    }}
+    type="button"
+  >
+    {slot}
+  </button>
+))}
 </div>
+<p className="font-body-sm text-body-sm text-on-surface-variant">
+  This is a preferred time request, not a confirmed booking.
+</p>
 </div>
 
-<button className="w-full py-3 rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(254,152,50,0.25)]" type="button">
-<span className="">Lock Selected Time Slot</span>
-<span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
+<button
+  className="w-full py-3 rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(254,152,50,0.25)] disabled:opacity-50 disabled:cursor-not-allowed"
+  disabled={!selectedDate || !selectedSlot}
+  onClick={addMeetingPreferenceToRequest}
+  type="button"
+>
+<span>{meetingPreferenceAdded ? "Preferred Time Added" : "Add Preferred Time to Request"}</span>
+<span className="material-symbols-outlined text-[18px]">{meetingPreferenceAdded ? "check_circle" : "calendar_add_on"}</span>
 </button>
+{meetingPreferenceAdded && (
+  <p className="font-body-sm text-body-sm text-secondary text-center" role="status">
+    {formatCalendarDate(selectedDate, { weekday: "long", day: "numeric", month: "long", year: "numeric" })} at {selectedSlot} SGT / MYT added to your request.
+  </p>
+)}
 </div>
 
 <div className="bg-surface-container-low rounded-xl p-space-md shadow-sm space-y-space-sm">
@@ -235,15 +392,6 @@ export default function ContactPage() {
 </div>
 <div className="min-w-0 flex-1">
 <p className="font-label-sm text-label-sm text-on-surface-variant">General &amp; Strategic Inquiries</p>
-<a className="text-primary font-semibold hover:text-secondary transition-colors truncate block" href="mailto:sales@g2houtreach.com">sales@g2houtreach.com</a>
-</div>
-</div>
-<div className="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest/80 shadow-sm">
-<div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span className="material-symbols-outlined text-[18px]">forward_to_inbox</span>
-</div>
-<div className="min-w-0 flex-1">
-<p className="font-label-sm text-label-sm text-on-surface-variant">Campaign Architecture Desk</p>
 <a className="text-primary font-semibold hover:text-secondary transition-colors truncate block" href="mailto:sales@g2houtreach.com">sales@g2houtreach.com</a>
 </div>
 </div>
@@ -270,7 +418,7 @@ export default function ContactPage() {
 </div>
 
 <div className="relative rounded-xl overflow-hidden shadow-lg h-48 bg-primary">
-<img alt="Executives discussing pipeline strategy in a modern boardroom" className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition-all duration-500" src="/images/contact-boardroom.jpg" />
+<img alt="Executives discussing business growth in a modern boardroom" className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition-all duration-500" src="/images/contact-boardroom.webp" width="512" height="279" loading="lazy" decoding="async" />
 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent p-space-sm flex flex-col justify-end text-on-primary">
 <span className="font-label-sm text-label-sm text-secondary-container uppercase">Strategic Alignment</span>
 <p className="font-headline-sm text-headline-sm text-on-primary leading-snug">From Ground 2 High-Growth Revenue.</p>
@@ -295,6 +443,36 @@ export default function ContactPage() {
 
 <form className="space-y-space-md" id="contactScopingForm" ref={formRef} onSubmit={handleSubmit}>
 <input className="hidden" name="botcheck" tabIndex={-1} type="checkbox" />
+<input
+  name="preferred_meeting_date"
+  type="hidden"
+  value={
+    meetingPreferenceAdded
+      ? formatCalendarDate(selectedDate, {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : "Not requested"
+  }
+/>
+<input
+  name="preferred_meeting_time"
+  type="hidden"
+  value={meetingPreferenceAdded ? selectedSlot : "Not requested"}
+/>
+<input name="preferred_meeting_timezone" type="hidden" value="Singapore Time (SGT / MYT, UTC+8)" />
+{meetingPreferenceAdded && (
+  <div className="rounded-lg bg-secondary-container/20 px-space-sm py-2 text-primary font-body-sm text-body-sm" role="status">
+    Preferred call time: {formatCalendarDate(selectedDate, {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })} at {selectedSlot} SGT / MYT. We’ll confirm availability after receiving your request.
+  </div>
+)}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
 <div className="space-y-1">
 <label className="block font-label-md text-label-md text-primary font-semibold" htmlFor="fullName">
@@ -420,16 +598,16 @@ export default function ContactPage() {
 <div>
 <div className="flex items-center justify-between mb-space-sm">
 <span className="font-headline-2xl text-headline-2xl text-primary/10 font-black leading-none">01</span>
-<span className="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold">&lt; 2 Hours</span>
+<span className="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold">Discovery Call</span>
 </div>
-<h3 className="font-headline-sm text-headline-sm text-primary mb-2">Same-Day Intelligence Reply</h3>
+<h3 className="font-headline-sm text-headline-sm text-primary mb-2">Availability &amp; Exploration Call</h3>
 <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                A senior revenue strategist checks your domain, market category, and verified TAM count. We review whether your average contract value aligns with outbound unit economics.
+                Based on your availability, we schedule a discovery call to connect, understand your current scenario, and identify potential areas where we can collaborate.
               </p>
 </div>
 <div className="mt-space-sm pt-space-sm flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-semibold">
 <span className="material-symbols-outlined text-[16px]">verified</span>
-<span className="">Account Validation Passed</span>
+<span className="">Mutual Alignment Check</span>
 </div>
 </div>
 
@@ -437,16 +615,16 @@ export default function ContactPage() {
 <div>
 <div className="flex items-center justify-between mb-space-sm">
 <span className="font-headline-2xl text-headline-2xl text-secondary/20 font-black leading-none">02</span>
-<span className="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">30 Min Call</span>
+<span className="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">Kick-Off</span>
 </div>
-<h3 className="font-headline-sm text-headline-sm text-primary mb-2">Targeting &amp; Strategy Diagnostic</h3>
+<h3 className="font-headline-sm text-headline-sm text-primary mb-2">Kick-Off Meeting</h3>
 <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                We dive into your past outbound experiments, current objection trends, and key value propositions. If outbound won’t work for your ICP, we’ll tell you directly.
+                Once you are ready to move forward, we align on service terms and dive into your requirements to thoroughly understand your buyers’ pain points.
               </p>
 </div>
 <div className="mt-space-sm pt-space-sm flex items-center gap-1.5 text-primary font-label-sm text-label-sm font-semibold">
 <span className="material-symbols-outlined text-[16px]">analytics</span>
-<span className="">Zero-Fluff Assessment</span>
+<span className="">Requirement Blueprint</span>
 </div>
 </div>
 
@@ -454,16 +632,16 @@ export default function ContactPage() {
 <div>
 <div className="flex items-center justify-between mb-space-sm">
 <span className="font-headline-2xl text-headline-2xl text-primary/10 font-black leading-none">03</span>
-<span className="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold">48h Delivery</span>
+<span className="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold">&lt; 20 Days</span>
 </div>
-<h3 className="font-headline-sm text-headline-sm text-primary mb-2">Custom Pipeline Projection</h3>
+<h3 className="font-headline-sm text-headline-sm text-primary mb-2">Project Onboarding</h3>
 <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                Receive an actionable outbound rollout blueprint detailing addressable accounts, suggested sequence structures, and expected monthly meeting velocity.
+                As soon as you agree to our terms, we fast-track your onboarding and start generating high-quality, qualified meetings in less than 20 days.
               </p>
 </div>
 <div className="mt-space-sm pt-space-sm flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-semibold">
 <span className="material-symbols-outlined text-[16px]">trending_up</span>
-<span className="">Clear ROI Math</span>
+<span className="">Swift Meeting Generation</span>
 </div>
 </div>
 </div>

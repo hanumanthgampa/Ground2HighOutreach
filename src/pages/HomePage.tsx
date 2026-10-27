@@ -262,11 +262,11 @@ export default function HomePage() {
 
 <div className="pt-space-xs">
 <div className="relative rounded-xl overflow-hidden shadow-sm">
-<img alt="Enterprise Revenue Team Session" className="w-full h-44 object-cover" data-alt="Modern executive boardroom meeting where sales leaders and revenue strategists analyze pipeline charts on digital displays, natural soft lighting, warm wooden accents with subtle deep navy and saffron brand highlights, clean professional photography" src="/images/enterprise-revenue-session.jpg" />
+<img alt="Enterprise revenue team meeting in a modern boardroom" className="w-full h-44 object-cover" src="/images/enterprise-revenue-session.webp" width="512" height="279" loading="lazy" decoding="async" />
 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-space-sm">
 <span className="font-label-sm text-label-sm text-surface-bright flex items-center gap-1.5">
 <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-                    Weekly strategic pipeline review in session
+                    Your next growth conversation starts here
                   </span>
 </div>
 </div>
@@ -448,7 +448,7 @@ export default function HomePage() {
 
 <div className="lg:col-span-5 space-y-space-md">
 <div className="rounded-2xl overflow-hidden shadow-md">
-<img alt="Executive Sales Leadership Consultation" className="w-full h-64 object-cover" data-alt="Two senior enterprise technology executives reviewing quarterly sales pipeline dashboards on tablet in an airy, sunlit office, professional corporate styling with muted navy and amber palette, crisp focus" src="/images/executive-sales-consultation.jpg" />
+<img alt="Sales leaders reviewing business growth plans together" className="w-full h-64 object-cover" src="/images/executive-sales-consultation.webp" width="512" height="279" loading="lazy" decoding="async" />
 </div>
 
 <div className="p-space-md rounded-xl bg-primary text-on-primary flex items-center justify-between shadow-lg">
