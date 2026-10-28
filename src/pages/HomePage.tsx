@@ -208,7 +208,7 @@ export default function HomePage() {
 <div className="lg:col-span-7 space-y-space-md">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container/15 text-secondary font-label-sm text-label-sm">
 <span className="material-symbols-outlined text-[14px]">psychology</span>
-<span className="">Why G2H Outreach Exists</span>
+<span className="">Why G2H Outreach</span>
 </div>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
             Built for teams who are tired of “leads” that never become conversations.
@@ -411,53 +411,57 @@ export default function HomePage() {
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
 
 <div className="lg:col-span-7 space-y-space-md">
-<div className="flex items-center gap-space-xs">
+<div className="flex flex-wrap items-center gap-space-xs">
 <span className="font-label-sm text-label-sm px-3 py-1 rounded-full bg-secondary-container/15 text-secondary font-semibold">
-                Client Snapshot
+                Client Success Story
               </span>
-<span className="font-label-sm text-label-sm text-on-surface-variant">B2B SaaS · Singapore &amp; Malaysia</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant">· Sales-led motion</span>
+<span className="font-label-sm text-label-sm text-on-surface-variant">Enterprise AI Agents · Singapore &amp; Malaysia · B2B Lead Generation</span>
 </div>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
-              One team, one quiet pipeline, and a new rhythm of conversations.
+              From targeted outreach to 3 successful client onboardings in just 30 days.
             </h2>
 <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-              A revenue team came to us with a familiar enterprise challenge: a strong software solution, excellent close rates, but an erratic top of the funnel that produced unpredictable quarters.
+              An enterprise AI agent solution provider wanted to connect with high-value enterprise prospects across Singapore and Malaysia. G2H Outreach supported their growth through targeted B2B lead generation, identifying relevant decision-makers and initiating conversations with organizations exploring enterprise AI solutions.
             </p>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              We clarified their high-conviction ICP, tore down generic messaging, and deployed a targeted multi-channel campaign into 800+ tier-1 accounts. Instead of chasing every lukewarm inbound, we zeroed in on high-fit organizations.
+              Through focused prospect research and personalized outreach, we generated 7 qualified leads in one month, resulting in 3 successful client onboardings.
             </p>
 
-<div className="grid grid-cols-1 gap-space-sm pt-space-xs">
-<div className="p-space-sm rounded-xl bg-surface-container-low">
-<div className="flex items-center gap-space-xs text-secondary mb-1">
-<span className="material-symbols-outlined text-[20px]">event_repeat</span>
-<span className="font-headline-sm text-headline-sm text-primary">Consistent meetings</span>
-</div>
-<p className="font-body-sm text-body-sm text-on-surface-variant">
-                  A predictable stream of validated sales discussions booked weekly, eliminating the boom-and-bust cycle.
-                </p>
-</div>
-</div>
 <div className="pt-space-xs">
-<p className="font-body-sm text-body-sm text-on-surface-variant italic">
-                Results look different in every vertical, but the core objective remains constant: a reliable, controllable pipeline your revenue leaders can budget on.
+<p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                At G2H Outreach, we turn targeted B2B outreach into meaningful conversations and measurable business outcomes.
               </p>
 </div>
 </div>
 
 <div className="lg:col-span-5 space-y-space-md">
-<div className="rounded-2xl overflow-hidden shadow-md">
-<img alt="Sales leaders reviewing business growth plans together" className="w-full h-64 object-cover" src="/images/executive-sales-consultation.webp" width="512" height="279" loading="lazy" decoding="async" />
+<div className="p-space-md lg:p-space-lg rounded-2xl bg-primary text-on-primary shadow-lg">
+<div className="mb-space-sm">
+<span className="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Results in 30 days</span>
+<h3 className="font-headline-md text-headline-md text-surface-bright mt-1">Focused outreach. Measurable outcomes.</h3>
 </div>
-
-<div className="p-space-md rounded-xl bg-primary text-on-primary flex items-center justify-between shadow-lg">
+<div className="divide-y divide-surface/15">
+<div className="py-space-sm first:pt-0 flex items-center justify-between gap-space-sm">
 <div>
-<span className="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">90-Day Conversion Result</span>
-<div className="font-headline-lg text-headline-lg text-surface-bright mt-0.5">+184% Opportunity Lift</div>
+<div className="font-headline-lg text-headline-lg text-surface-bright">7</div>
+<p className="font-body-sm text-body-sm text-on-primary-container">Qualified leads</p>
 </div>
-<div className="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold">
-<span className="material-symbols-outlined text-[24px]">verified</span>
+<span className="material-symbols-outlined text-[24px] text-secondary-container" aria-hidden="true">person_search</span>
+</div>
+<div className="py-space-sm flex items-center justify-between gap-space-sm">
+<div>
+<div className="font-headline-lg text-headline-lg text-surface-bright">3</div>
+<p className="font-body-sm text-body-sm text-on-primary-container">Successful client onboardings</p>
+</div>
+<span className="material-symbols-outlined text-[24px] text-secondary-container" aria-hidden="true">handshake</span>
+</div>
+<div className="py-space-sm last:pb-0 flex items-center justify-between gap-space-sm">
+<div>
+<div className="font-headline-md text-headline-md text-surface-bright">Pilot to full-time</div>
+<p className="font-body-sm text-body-sm text-on-primary-container">Impressed with our pilot results, the client (founder and CEO) chose G2H Outreach as their long-term lead generation partner.</p>
+</div>
+<span className="material-symbols-outlined text-[24px] text-secondary-container" aria-hidden="true">handshake</span>
+</div>
 </div>
 </div>
 </div>

@@ -1,16 +1,31 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-const meetingTimeZone = "Asia/Singapore";
 const meetingSlots = ["10:00 AM", "1:30 PM", "3:00 PM"];
-const singaporeDateFormatter = new Intl.DateTimeFormat("en-CA", {
-  timeZone: meetingTimeZone,
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
+const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata";
+const timeZoneOptions = [
+  { value: "Asia/Kolkata", label: "India Standard Time (IST)" },
+  { value: "Asia/Singapore", label: "Singapore Time" },
+  { value: "Asia/Kuala_Lumpur", label: "Malaysia Time" },
+  { value: "Asia/Dubai", label: "Gulf Standard Time" },
+  { value: "Asia/Tokyo", label: "Japan Standard Time" },
+  { value: "Europe/London", label: "United Kingdom Time" },
+  { value: "Europe/Berlin", label: "Central European Time" },
+  { value: "America/New_York", label: "US Eastern Time" },
+  { value: "America/Chicago", label: "US Central Time" },
+  { value: "America/Los_Angeles", label: "US Pacific Time" },
+  { value: "Australia/Sydney", label: "Australian Eastern Time" },
+];
+const availableTimeZones = timeZoneOptions.some(({ value }) => value === browserTimeZone)
+  ? timeZoneOptions
+  : [{ value: browserTimeZone, label: `Your local time (${browserTimeZone})` }, ...timeZoneOptions];
 
-function getSingaporeDateKey(date = new Date()) {
-  const parts = singaporeDateFormatter.formatToParts(date);
+function getDateKeyInTimeZone(timeZone: string, date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
   const year = parts.find((part) => part.type === "year")?.value;
   const month = parts.find((part) => part.type === "month")?.value;
   const day = parts.find((part) => part.type === "day")?.value;
@@ -46,6 +61,71 @@ function formatCalendarDate(dateKey: string, options: Intl.DateTimeFormatOptions
   );
 }
 
+function getTimeParts(time: string) {
+  const twelveHourTime = time.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (twelveHourTime) {
+    const [, hourText, minuteText, periodText] = twelveHourTime;
+    const hour = Number(hourText) % 12 + (periodText.toUpperCase() === "PM" ? 12 : 0);
+    return { hour, minute: Number(minuteText) };
+  }
+
+  const twentyFourHourTime = time.match(/^(\d{2}):(\d{2})$/);
+  if (twentyFourHourTime) {
+    return { hour: Number(twentyFourHourTime[1]), minute: Number(twentyFourHourTime[2]) };
+  }
+  throw new RangeError("Invalid meeting time.");
+}
+
+function getMeetingInstant(dateKey: string, time: string, timeZone: string) {
+  const { hour, minute } = getTimeParts(time);
+  const [year, month, day] = dateKey.split("-").map(Number);
+  const requestedTime = Date.UTC(year, month - 1, day, hour, minute);
+  let instant = requestedTime;
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  });
+
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const parts = formatter.formatToParts(new Date(instant));
+    const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+    const representedAsUtc = Date.UTC(
+      Number(values.year),
+      Number(values.month) - 1,
+      Number(values.day),
+      Number(values.hour),
+      Number(values.minute),
+    );
+    instant = requestedTime - (representedAsUtc - instant);
+  }
+
+  return new Date(instant);
+}
+
+function formatMeetingSlot(dateKey: string, time: string, inputTimeZone: string, outputTimeZone: string) {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: outputTimeZone,
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short",
+  }).format(getMeetingInstant(dateKey, time, inputTimeZone));
+}
+
+function formatMeetingDate(dateKey: string, time: string, inputTimeZone: string, outputTimeZone: string) {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: outputTimeZone,
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(getMeetingInstant(dateKey, time, inputTimeZone));
+}
+
 function getCalendarCells(month: Date) {
   const year = month.getUTCFullYear();
   const monthIndex = month.getUTCMonth();
@@ -65,11 +145,13 @@ function getCalendarCells(month: Date) {
 }
 
 export default function ContactPage() {
-  const [todayDateKey] = useState(getSingaporeDateKey);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [customTime, setCustomTime] = useState("");
+  const [selectedTimeZone, setSelectedTimeZone] = useState(browserTimeZone);
+  const todayDateKey = getDateKeyInTimeZone(selectedTimeZone);
   const [calendarMonth, setCalendarMonth] = useState(() =>
-    monthStart(dateFromKey(getSingaporeDateKey())),
+    monthStart(dateFromKey(getDateKeyInTimeZone(browserTimeZone))),
   );
   const [meetingPreferenceAdded, setMeetingPreferenceAdded] = useState(false);
   const maxDateKey = addDays(todayDateKey, 90);
@@ -101,6 +183,14 @@ export default function ContactPage() {
     setMeetingPreferenceAdded(true);
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
+  const handleTimeZoneChange = (timeZone: string) => {
+    setSelectedTimeZone(timeZone);
+    setSelectedDate("");
+    setSelectedSlot("");
+    setCustomTime("");
+    setMeetingPreferenceAdded(false);
+    setCalendarMonth(monthStart(dateFromKey(getDateKeyInTimeZone(timeZone))));
+  };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitError("");
@@ -123,7 +213,7 @@ export default function ContactPage() {
         body: JSON.stringify({
           access_key: accessKey,
           ...Object.fromEntries(formData.entries()),
-          timezone: "Singapore Time (SGT / MYT, UTC+8)",
+          timezone: "India Standard Time (IST)",
           subject: "New G2H Outreach contact request",
           from_name: "G2H Outreach Website",
         }),
@@ -296,12 +386,9 @@ export default function ContactPage() {
 <div className="grid grid-cols-7 gap-1 text-center font-label-md text-label-md" id="calendarDays">
 {calendarCells.map((cell, index) => {
   if (!cell) return <span aria-hidden="true" className="py-1" key={`empty-${index}`} />;
-  const weekday = dateFromKey(cell.dateKey).getUTCDay();
   const unavailable =
     cell.dateKey <= todayDateKey ||
-    cell.dateKey > maxDateKey ||
-    weekday === 0 ||
-    weekday === 6;
+    cell.dateKey > maxDateKey;
   const isSelected = selectedDate === cell.dateKey;
 
   return (
@@ -323,6 +410,7 @@ export default function ContactPage() {
       onClick={() => {
         setSelectedDate(cell.dateKey);
         setSelectedSlot("");
+        setCustomTime("");
         setMeetingPreferenceAdded(false);
       }}
       type="button"
@@ -339,8 +427,25 @@ export default function ContactPage() {
 <label className="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">
   {selectedDate ? `Preferred time (${formatCalendarDate(selectedDate, { weekday: "short", day: "numeric", month: "short" })})` : "Select a date first"}
 </label>
-<span className="font-label-sm text-label-sm text-secondary font-medium">SGT / MYT (UTC+8)</span>
 </div>
+<div className="space-y-1">
+  <label className="font-label-sm text-label-sm text-on-surface-variant" htmlFor="meetingTimeZone">
+    Select your time zone
+  </label>
+  <select
+    className="w-full rounded-lg bg-surface-container px-space-sm py-2 text-primary font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-secondary-container"
+    id="meetingTimeZone"
+    onChange={(event) => handleTimeZoneChange(event.target.value)}
+    value={selectedTimeZone}
+  >
+    {availableTimeZones.map(({ value, label }) => (
+      <option key={value} value={value}>{label}</option>
+    ))}
+  </select>
+</div>
+<p className="font-body-sm text-body-sm text-on-surface-variant">
+  Choose the timezone you want the suggested and custom times shown in.
+</p>
 <div className="grid grid-cols-3 gap-2" id="slotPicker">
 {meetingSlots.map((slot) => (
   <button
@@ -354,16 +459,40 @@ export default function ContactPage() {
     key={slot}
     onClick={() => {
       setSelectedSlot(slot);
+      setCustomTime("");
       setMeetingPreferenceAdded(false);
     }}
     type="button"
   >
-    {slot}
+    {formatMeetingSlot(
+      selectedDate || todayDateKey,
+      slot,
+      selectedTimeZone,
+      selectedTimeZone,
+    )}
   </button>
 ))}
 </div>
+<div className="space-y-1">
+  <label className="font-label-sm text-label-sm text-on-surface-variant" htmlFor="customMeetingTime">
+    Or enter another time
+  </label>
+  <input
+    className="w-full rounded-lg bg-surface-container px-space-sm py-2 text-primary font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-secondary-container disabled:opacity-50"
+    disabled={!selectedDate}
+    id="customMeetingTime"
+    onChange={(event) => {
+      const time = event.target.value;
+      setCustomTime(time);
+      setSelectedSlot(time);
+      setMeetingPreferenceAdded(false);
+    }}
+    type="time"
+    value={customTime}
+  />
+</div>
 <p className="font-body-sm text-body-sm text-on-surface-variant">
-  This is a preferred time request, not a confirmed booking.
+  Your selected date and time will be converted to India Standard Time (IST) in the email. This is a preferred-time request, not a confirmed booking.
 </p>
 </div>
 
@@ -378,7 +507,7 @@ export default function ContactPage() {
 </button>
 {meetingPreferenceAdded && (
   <p className="font-body-sm text-body-sm text-secondary text-center" role="status">
-    {formatCalendarDate(selectedDate, { weekday: "long", day: "numeric", month: "long", year: "numeric" })} at {selectedSlot} SGT / MYT added to your request.
+    Your preferred time is {formatMeetingDate(selectedDate, selectedSlot, selectedTimeZone, selectedTimeZone)} at {formatMeetingSlot(selectedDate, selectedSlot, selectedTimeZone, selectedTimeZone)} ({selectedTimeZone}). The email will show it in IST.
   </p>
 )}
 </div>
@@ -429,9 +558,11 @@ export default function ContactPage() {
 <div className="lg:col-span-7">
 <div className="bg-surface-container-lowest/95 backdrop-blur-2xl rounded-2xl p-space-md md:p-space-lg shadow-2xl relative">
 
-<div className="absolute top-space-md right-space-md hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
-<span className="w-2 h-2 rounded-full bg-tertiary-container"></span>
-<span className="">Project Diagnostic Desk</span>
+<div className="absolute top-space-md right-space-md hidden sm:flex" aria-hidden="true">
+<span className="relative flex h-3 w-3">
+  <span className="absolute inline-flex h-full w-full rounded-full bg-secondary-container animate-ping"></span>
+  <span className="relative inline-flex h-3 w-3 rounded-full bg-secondary-container"></span>
+</span>
 </div>
 <div className="mb-space-md">
 <span className="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wide">Project Feasibility &amp; Briefing</span>
@@ -448,29 +579,28 @@ export default function ContactPage() {
   type="hidden"
   value={
     meetingPreferenceAdded
-      ? formatCalendarDate(selectedDate, {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })
+      ? formatMeetingDate(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")
       : "Not requested"
   }
 />
 <input
   name="preferred_meeting_time"
   type="hidden"
-  value={meetingPreferenceAdded ? selectedSlot : "Not requested"}
+  value={
+    meetingPreferenceAdded
+      ? formatMeetingSlot(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")
+      : "Not requested"
+  }
 />
-<input name="preferred_meeting_timezone" type="hidden" value="Singapore Time (SGT / MYT, UTC+8)" />
+<input name="preferred_meeting_timezone" type="hidden" value="India Standard Time (IST)" />
+<input
+  name="client_entered_time_zone"
+  type="hidden"
+  value={selectedTimeZone}
+/>
 {meetingPreferenceAdded && (
   <div className="rounded-lg bg-secondary-container/20 px-space-sm py-2 text-primary font-body-sm text-body-sm" role="status">
-    Preferred call time: {formatCalendarDate(selectedDate, {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })} at {selectedSlot} SGT / MYT. We’ll confirm availability after receiving your request.
+    Preferred call time: {formatMeetingDate(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")} at {formatMeetingSlot(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")} IST. Your time zone: {selectedTimeZone}. We’ll confirm availability after receiving your request.
   </div>
 )}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
@@ -560,7 +690,7 @@ export default function ContactPage() {
 </div>
 </div>
 
-<div className="mt-space-xl p-space-md rounded-2xl bg-surface-container-low shadow-sm">
+{/* <div className="mt-space-xl p-space-md rounded-2xl bg-surface-container-low shadow-sm">
 <div className="grid grid-cols-1 md:grid-cols-4 gap-space-md items-center">
 <div className="space-y-1">
 <div className="flex items-center gap-2">
@@ -582,7 +712,7 @@ export default function ContactPage() {
 <span className="font-headline-lg text-headline-lg text-secondary font-extrabold">39 in motion</span>
 </div>
 </div>
-</div>
+</div> */}
 
 <div className="mt-space-xl pt-space-lg">
 <div className="text-center max-w-2xl mx-auto mb-space-lg">

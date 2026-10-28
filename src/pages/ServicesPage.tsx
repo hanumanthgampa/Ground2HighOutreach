@@ -31,45 +31,37 @@ export default function ServicesPage() {
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-space-md p-space-md rounded-xl bg-surface-container-lowest/80 backdrop-blur-md shadow-sm border border-outline-variant/20 mb-space-lg">
 <div className="flex flex-col">
-<span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Avg. Connect-to-Meeting</span>
-<span className="font-headline-lg text-headline-lg text-primary mt-1">28.4%</span>
+<span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ACTIVE CLIENTS</span>
+<span className="font-headline-lg text-headline-lg text-primary mt-1">10+</span>
 <span className="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
-<span className="material-symbols-outlined text-[16px]">trending_up</span> B2B ICP Verified
+<span className="material-symbols-outlined text-[16px]">trending_up</span>Trusted Partners
           </span>
 </div>
 <div className="flex flex-col">
-<span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lead Deliverability SLA</span>
+<span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lead Deliverability</span>
 <span className="font-headline-lg text-headline-lg text-primary mt-1">99.2%</span>
 <span className="font-body-sm text-body-sm text-on-tertiary-container flex items-center gap-1 mt-0.5">
 <span className="material-symbols-outlined text-[16px]">verified</span> SPF / DKIM / DMARC
           </span>
 </div>
 <div className="flex flex-col">
-<span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Show-Up Reliability</span>
-<span className="font-headline-lg text-headline-lg text-primary mt-1">87%</span>
-<span className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Pre-call brief dossiers</span>
+<span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ON-TIME MEETING RATE
+</span>
+<span className="font-headline-lg text-headline-lg text-primary mt-1">98.4%</span>
+<span className="font-body-sm text-body-sm text-on-tertiary-container flex items-center gap-1 mt-0.5">
+<span className="material-symbols-outlined text-[16px]">schedule</span>Punctual attendance
+          </span>
 </div>
 <div className="flex flex-col">
 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Time to First Meeting</span>
-<span className="font-headline-lg text-headline-lg text-secondary mt-1">&lt; 14 Days</span>
-<span className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Rapid Launch Sprint</span>
+<span className="font-headline-lg text-headline-lg text-secondary mt-1">&lt; 20 Days</span>
+<span className="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span className="material-symbols-outlined text-[16px]">rocket_launch</span>Rapid Launch Sprint
+          </span>
 </div>
 </div>
 
-<div className="flex flex-wrap items-center gap-space-xs pt-space-xs">
-<button className={activeFilter === "all" ? "px-space-md py-space-xs rounded-full bg-primary text-surface font-label-md text-label-md shadow-sm transition-all" : "px-space-md py-space-xs rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-md text-label-md transition-all"} data-filter-btn="" data-target-filter="all" onClick={() => setActiveFilter("all")}>
-          All Services
-        </button>
-<button className={activeFilter === "outbound" ? "px-space-md py-space-xs rounded-full bg-primary text-surface font-label-md text-label-md shadow-sm transition-all" : "px-space-md py-space-xs rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-md text-label-md transition-all"} data-filter-btn="" data-target-filter="outbound" onClick={() => setActiveFilter("outbound")}>
-          Targeted Outbound
-        </button>
-<button className={activeFilter === "qualification" ? "px-space-md py-space-xs rounded-full bg-primary text-surface font-label-md text-label-md shadow-sm transition-all" : "px-space-md py-space-xs rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-md text-label-md transition-all"} data-filter-btn="" data-target-filter="qualification" onClick={() => setActiveFilter("qualification")}>
-          Lead Qualification &amp; Handoff
-        </button>
-<button className={activeFilter === "analytics" ? "px-space-md py-space-xs rounded-full bg-primary text-surface font-label-md text-label-md shadow-sm transition-all" : "px-space-md py-space-xs rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-md text-label-md transition-all"} data-filter-btn="" data-target-filter="analytics" onClick={() => setActiveFilter("analytics")}>
-          Pipeline Analytics &amp; CRM Ops
-        </button>
-</div>
+
 </div>
 </section>
 
@@ -158,10 +150,10 @@ export default function ServicesPage() {
 </div>
 <div className="flex-1 min-w-0">
 <div className="flex items-center justify-between">
-<p className="font-label-md text-label-md text-primary font-semibold">Day 1: Account Intent Research</p>
-<span className="text-on-tertiary-container font-label-sm text-label-sm">Verified</span>
+<p className="font-label-md text-label-md text-primary font-semibold">Day 1: ICP & Buyer Research</p>
+<span className="text-on-tertiary-container font-label-sm text-label-sm">Research</span>
 </div>
-<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Executive trigger identified: 10-K cloud modernization initiative.</p>
+<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Identify ideal customers, decision-makers, and key business pain points.</p>
 </div>
 </div>
 
@@ -171,10 +163,10 @@ export default function ServicesPage() {
 </div>
 <div className="flex-1 min-w-0">
 <div className="flex items-center justify-between">
-<p className="font-label-md text-label-md text-primary font-semibold">Day 2: Bespoke Value Email</p>
-<span className="text-secondary font-label-sm text-label-sm">54% Open Rate</span>
+<p className="font-label-md text-label-md text-primary font-semibold">Day 2: Personalized Email Outreach</p>
+<span className="text-secondary font-label-sm text-label-sm">Engage</span>
 </div>
-<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Zero fluff. Concise 65-word peer reference and quantitative insight.</p>
+<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Send targeted emails focused on buyer challenges and business value.</p>
 </div>
 </div>
 
@@ -184,10 +176,10 @@ export default function ServicesPage() {
 </div>
 <div className="flex-1 min-w-0">
 <div className="flex items-center justify-between">
-<p className="font-label-md text-label-md text-primary font-semibold">Day 5: Executive LinkedIn Touch</p>
-<span className="text-primary font-label-sm text-label-sm">Soft Touch</span>
+<p className="font-label-md text-label-md text-primary font-semibold">Day 5: LinkedIn Engagement</p>
+<span className="text-primary font-label-sm text-label-sm">Connect</span>
 </div>
-<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Thoughtful commentary on VP’s recent talk, reinforcing value proposition.</p>
+<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Build familiarity with decision-makers through relevant, thoughtful interactions.</p>
 </div>
 </div>
 
@@ -197,10 +189,10 @@ export default function ServicesPage() {
 </div>
 <div className="flex-1 min-w-0">
 <div className="flex items-center justify-between">
-<p className="font-label-md text-label-md text-primary font-semibold">Day 8: Warm Calling Engagement</p>
-<span className="text-secondary font-label-sm text-label-sm">Conversion</span>
+<p className="font-label-md text-label-md text-primary font-semibold">Day 8: Lead Qualification & Meetings</p>
+<span className="text-secondary font-label-sm text-label-sm">Convert</span>
 </div>
-<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Leveraging prior opens to engage in high-context objection handling.</p>
+<p className="font-body-sm text-body-sm text-on-surface-variant truncate">Follow up, qualify prospects using BANT, and book meaningful sales meetings.</p>
 </div>
 </div>
 </div>

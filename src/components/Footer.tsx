@@ -15,12 +15,11 @@ export default function Footer() {
               </span>
             </div>
             <p className="font-body-sm text-body-sm text-on-primary-container leading-relaxed">
-              From Ground 2 High-Growth Pipeline: Engineering structured outbound architectures
-              that convert high-value accounts into predictable revenue.
+              From Ground 2 High-Growth Pipeline: We build structured, multi-channel B2B outreach campaigns that connect your business with the right decision-makers, generate qualified leads, and turn prospects into meaningful sales opportunities.
             </p>
             <div className="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm">
               <span className="material-symbols-outlined text-[14px]">verified</span>
-              Enterprise Outbound Architecture
+              Your B2B Growth & Lead Generation Partner
             </div>
           </div>
 
