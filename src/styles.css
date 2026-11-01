@@ -44,14 +44,17 @@
 }
 
 @layer base {
-  html,
-  body {
-    margin: 0;
-    padding: 0;
+  html {
+    overflow-x: clip;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 
   body {
-    overscroll-behavior: none;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: clip;
   }
 
   main > :first-child {
@@ -62,7 +65,71 @@
     margin-bottom: 0 !important;
   }
 
+  /* Sleek modern custom scrollbar */
   ::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0ede9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #fe9832;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8f4e00;
+  }
+}
+
+/* Page entrance transition from the sides */
+@keyframes pageSlideFromSide {
+  0% {
+    opacity: 0;
+    transform: translate3d(28px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-transition-enter {
+  animation: pageSlideFromSide 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Smooth ambient background floating */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(16px, -18px, 0) scale(1.06);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 12s ease-in-out infinite;
+}
+
+/* Interactive card hover elevation */
+.interactive-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.interactive-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -8px rgba(4, 21, 52, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-enter {
+    animation: none !important;
+  }
+  .animate-float-slow {
+    animation: none !important;
+  }
+  .interactive-card:hover {
+    transform: none !important;
   }
 }

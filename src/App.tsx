@@ -10,24 +10,24 @@ const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 
 const pageMetadata: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "B2B Outreach & Lead Generation | G2H Outreach",
+    title: "B2B Lead Gen, Multichannel Outreach & AI Campaign Management | G2H Outreach",
     description:
-      "G2H Outreach helps B2B teams research target accounts, create relevant outreach, and support better sales conversations.",
+      "Scale your B2B sales pipeline with G2H Outreach. We combine AI-verified data mining, bespoke multichannel outreach, and agile AI campaign management to fill sales calendars with qualified meetings.",
   },
   "/services": {
-    title: "B2B Outreach Services | G2H Outreach",
+    title: "Multichannel Outreach & AI Campaign Management Services | G2H Outreach",
     description:
-      "Explore G2H Outreach services for account research, targeted outbound campaigns, lead qualification, and sales handoffs.",
+      "Explore G2H Outreach services: AI-verified data mining, personalized multichannel outreach (email & LinkedIn), agile AI campaign management, and conversion-focused web design.",
   },
   "/approach": {
-    title: "Our B2B Outreach Approach | G2H Outreach",
+    title: "4-Phase Outbound Architecture & Methodology | G2H Outreach",
     description:
-      "See how G2H Outreach researches accounts, builds thoughtful campaigns, qualifies responses, and improves outreach over time.",
+      "Discover our disciplined 4-phase outbound architecture: AI-verified data mining, technical safeguards, multichannel outreach orchestration, and continuous AI campaign management.",
   },
   "/contact": {
-    title: "Contact G2H Outreach | Discuss Your Goals",
+    title: "Book a Pipeline Strategy Call | G2H Outreach",
     description:
-      "Contact G2H Outreach to discuss your target accounts, outbound goals, and how our B2B outreach services may support your team.",
+      "Schedule a direct 30-minute pipeline strategy call with G2H Outreach to review your target accounts, email deliverability, and custom multichannel outreach roadmap.",
   },
   "/privacy": {
     title: "Privacy Policy Draft | G2H Outreach",
@@ -93,16 +93,18 @@ export default function App() {
           </main>
         }
       >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/approach" element={<ApproachPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacy" element={<PolicyPage policy="privacy" />} />
-          <Route path="/terms" element={<PolicyPage policy="terms" />} />
-          <Route path="/security" element={<PolicyPage policy="security" />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <div key={pathname} className="page-transition-enter">
+          <Routes location={pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/approach" element={<ApproachPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PolicyPage policy="privacy" />} />
+            <Route path="/terms" element={<PolicyPage policy="terms" />} />
+            <Route path="/security" element={<PolicyPage policy="security" />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
       </Suspense>
       <Footer />
     </>

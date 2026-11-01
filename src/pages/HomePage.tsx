@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ScrollReveal from "../components/ScrollReveal";
 
 const pipelineHighlights = [
   {
@@ -39,14 +40,15 @@ export default function HomePage() {
 
 <div className="relative w-full overflow-hidden">
 
-<div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-secondary-container/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
-<div className="absolute top-[480px] -right-36 w-[640px] h-[520px] bg-tertiary-fixed/20 blur-[140px] rounded-full pointer-events-none -z-10"></div>
+<div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-secondary-container/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-float-slow"></div>
+<div className="absolute top-[480px] -right-36 w-[640px] h-[520px] bg-tertiary-fixed/20 blur-[140px] rounded-full pointer-events-none -z-10 animate-float-slow" style={{ animationDelay: "-6s" }}></div>
 
 <section className="max-w-7xl mx-auto px-gutter pt-space-lg pb-space-xl">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
 
 <div className="lg:col-span-7 space-y-space-md">
-
+<ScrollReveal direction="left" delay={60}>
+<div className="space-y-space-md">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm">
 <span className="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
 <span className="">From Ground 2 High-Growth Pipeline</span>
@@ -61,11 +63,11 @@ export default function HomePage() {
           </p>
 
 <div className="pt-space-xs flex flex-wrap items-center gap-space-sm">
-<Link className="inline-flex items-center gap-space-xs px-space-lg py-3.5 rounded-full bg-secondary-container text-primary font-headline-sm text-headline-sm hover:brightness-105 active:scale-95 transition-all shadow-[0_12px_24px_rgba(254,152,50,0.32)]" to="/contact">
+<Link className="inline-flex items-center gap-space-xs px-space-lg py-3.5 rounded-full bg-secondary-container text-primary font-headline-sm text-headline-sm hover:brightness-110 active:scale-95 transition-all shadow-[0_12px_24px_rgba(254,152,50,0.32)] group" to="/contact">
 <span className="">Book a strategy call</span>
-<span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+<span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </Link>
-<Link className="inline-flex items-center gap-space-xs px-space-md py-3.5 rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm hover:bg-surface-container-highest transition-all shadow-sm" to="/approach">
+<Link className="inline-flex items-center gap-space-xs px-space-md py-3.5 rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm hover:bg-surface-container-highest hover:shadow-md transition-all shadow-sm" to="/approach">
 <span className="material-symbols-outlined text-[20px] text-primary">explore</span>
 <span className="">See how we generate leads</span>
 </Link>
@@ -78,7 +80,7 @@ export default function HomePage() {
 </div>
 
 <div className="pt-space-sm grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
-<div className="p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-start gap-space-sm">
+<div className="p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-start gap-space-sm interactive-card hover:-translate-y-1 hover:shadow-md transition-all duration-300">
 <div className="p-2 rounded-lg bg-surface-container-highest text-primary">
 <span className="material-symbols-outlined text-[22px]">calendar_today</span>
 </div>
@@ -90,7 +92,7 @@ export default function HomePage() {
                 </p>
 </div>
 </div>
-<div className="p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-start gap-space-sm">
+<div className="p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-start gap-space-sm interactive-card hover:-translate-y-1 hover:shadow-md transition-all duration-300">
 <div className="p-2 rounded-lg bg-secondary-fixed text-secondary">
 <span className="material-symbols-outlined text-[22px]">event_available</span>
 </div>
@@ -104,12 +106,15 @@ export default function HomePage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
+</div>
 
 <div className="lg:col-span-5 relative">
-
+<ScrollReveal direction="right" delay={160}>
+<div className="relative">
 <div className="absolute inset-0 bg-gradient-to-tr from-secondary-container/20 to-tertiary-fixed-dim/20 rounded-2xl blur-xl -z-10"></div>
 
-<div className="p-space-md lg:p-space-lg rounded-2xl bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_24px_48px_-8px_rgba(27,42,74,0.12)] space-y-space-md">
+<div className="p-space-md lg:p-space-lg rounded-2xl bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_24px_48px_-8px_rgba(27,42,74,0.12)] space-y-space-md interactive-card hover:shadow-2xl transition-all duration-300">
 
 <div className="flex items-center justify-between gap-space-sm pb-space-xs">
 <div className="flex items-center gap-space-xs">
@@ -197,6 +202,8 @@ export default function HomePage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
+</div>
 </div>
 </section>
 </div>
@@ -206,6 +213,8 @@ export default function HomePage() {
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
 
 <div className="lg:col-span-7 space-y-space-md">
+<ScrollReveal direction="left" delay={50}>
+<div className="space-y-space-md">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container/15 text-secondary font-label-sm text-label-sm">
 <span className="material-symbols-outlined text-[14px]">psychology</span>
 <span className="">Why G2H Outreach</span>
@@ -222,13 +231,16 @@ export default function HomePage() {
 <div>
 <Link className="inline-flex items-center gap-space-xs font-headline-sm text-headline-sm text-primary hover:text-secondary transition-colors group" to="/approach">
 <span className="">See our structured approach</span>
-<span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+<span className="material-symbols-outlined text-[20px] group-hover:translate-x-1.5 transition-transform">arrow_forward</span>
 </Link>
 </div>
 </div>
+</ScrollReveal>
+</div>
 
 <div className="lg:col-span-5">
-<div className="p-space-lg rounded-2xl bg-surface-container-lowest shadow-[0_16px_36px_rgba(27,42,74,0.06)] space-y-space-md">
+<ScrollReveal direction="right" delay={150}>
+<div className="p-space-lg rounded-2xl bg-surface-container-lowest shadow-[0_16px_36px_rgba(27,42,74,0.06)] space-y-space-md interactive-card hover:shadow-2xl transition-all duration-300">
 <div>
 <span className="font-label-sm text-label-sm text-on-tertiary-container uppercase tracking-wider">The Day-to-Day Reality</span>
 <h3 className="font-headline-lg text-headline-lg text-primary mt-1">What it feels like to work with us</h3>
@@ -261,17 +273,18 @@ export default function HomePage() {
 </ul>
 
 <div className="pt-space-xs">
-<div className="relative rounded-xl overflow-hidden shadow-sm">
-<img alt="Enterprise revenue team meeting in a modern boardroom" className="w-full h-44 object-cover" src="/images/enterprise-revenue-session.webp" width="512" height="279" loading="lazy" decoding="async" />
+<div className="relative rounded-xl overflow-hidden shadow-sm group">
+<img alt="Enterprise revenue team meeting in a modern boardroom" className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500" src="/images/enterprise-revenue-session.webp" width="512" height="279" loading="lazy" decoding="async" />
 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-space-sm">
 <span className="font-label-sm text-label-sm text-surface-bright flex items-center gap-1.5">
-<span className="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
                     Your next growth conversation starts here
                   </span>
 </div>
 </div>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </div>
 </div>
@@ -280,6 +293,7 @@ export default function HomePage() {
 <section className="w-full py-space-xl bg-surface">
 <div className="max-w-7xl mx-auto px-gutter space-y-space-xl">
 
+<ScrollReveal direction="left" delay={50}>
 <div className="max-w-3xl space-y-space-xs">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm">
 <span className="material-symbols-outlined text-[14px]">tune</span>
@@ -292,16 +306,18 @@ export default function HomePage() {
           We design and run lead generation programs that match your sales motion, not someone else’s template. Here’s a quick glimpse before you dive into the details.
         </p>
 </div>
+</ScrollReveal>
 
 <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
 
-<div className="p-space-lg rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm flex flex-col justify-between group">
+<ScrollReveal direction="up" delay={50} className="h-full">
+<div className="p-space-lg rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm flex flex-col justify-between group interactive-card hover:-translate-y-2 hover:shadow-xl h-full">
 <div className="space-y-space-md">
-<div className="w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center">
+<div className="w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center group-hover:scale-110 group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300">
 <span className="material-symbols-outlined text-[26px]">forward_to_inbox</span>
 </div>
 <div>
-<h3 className="font-headline-lg text-headline-lg text-primary">Outbound that doesn’t feel robotic</h3>
+<h3 className="font-headline-lg text-headline-lg text-primary group-hover:text-secondary transition-colors">Outbound that doesn’t feel robotic</h3>
 </div>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Carefully researched outbound campaigns that respect your buyer’s time, attention, and executive inbox.
@@ -327,14 +343,16 @@ export default function HomePage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="p-space-lg rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm flex flex-col justify-between group">
+<ScrollReveal direction="up" delay={150} className="h-full">
+<div className="p-space-lg rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm flex flex-col justify-between group interactive-card hover:-translate-y-2 hover:shadow-xl h-full">
 <div className="space-y-space-md">
-<div className="w-12 h-12 rounded-xl bg-tertiary-container/15 text-on-tertiary-container flex items-center justify-center">
+<div className="w-12 h-12 rounded-xl bg-tertiary-container/15 text-on-tertiary-container flex items-center justify-center group-hover:scale-110 group-hover:bg-on-tertiary-container group-hover:text-surface transition-all duration-300">
 <span className="material-symbols-outlined text-[26px]">explore</span>
 </div>
 <div>
-<h3 className="font-headline-lg text-headline-lg text-primary">Lead management with real follow-through</h3>
+<h3 className="font-headline-lg text-headline-lg text-primary group-hover:text-on-tertiary-container transition-colors">Lead management with real follow-through</h3>
 </div>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Leads are tracked, warmed, and handed over with rich tactical context—never dumped as a cold, contextless spreadsheet.
@@ -360,14 +378,16 @@ export default function HomePage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="p-space-lg rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm flex flex-col justify-between group">
+<ScrollReveal direction="up" delay={250} className="h-full">
+<div className="p-space-lg rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm flex flex-col justify-between group interactive-card hover:-translate-y-2 hover:shadow-xl h-full">
 <div className="space-y-space-md">
-<div className="w-12 h-12 rounded-xl bg-primary-fixed text-primary flex items-center justify-center">
+<div className="w-12 h-12 rounded-xl bg-primary-fixed text-primary flex items-center justify-center group-hover:scale-110 group-hover:bg-primary group-hover:text-surface transition-all duration-300">
 <span className="material-symbols-outlined text-[26px]">insights</span>
 </div>
 <div>
-<h3 className="font-headline-lg text-headline-lg text-primary">Clarity on what’s actually working</h3>
+<h3 className="font-headline-lg text-headline-lg text-primary group-hover:text-secondary transition-colors">Clarity on what’s actually working</h3>
 </div>
 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Regular cadence reviews that clearly answer the strategic question: <em className="font-medium text-primary">“What do we double down on next month?”</em>
@@ -393,13 +413,16 @@ export default function HomePage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 </div>
 
 <div className="flex items-center justify-center pt-space-xs">
-<Link className="inline-flex items-center gap-space-xs px-space-lg py-3 rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm hover:bg-secondary-container hover:text-primary transition-all shadow-sm" to="/services">
+<ScrollReveal direction="zoom" delay={200}>
+<Link className="inline-flex items-center gap-space-xs px-space-lg py-3 rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm hover:bg-secondary-container hover:text-primary hover:shadow-lg transition-all shadow-sm group" to="/services">
 <span className="">Explore all services</span>
-<span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+<span className="material-symbols-outlined text-[20px] group-hover:translate-x-1.5 transition-transform duration-200">arrow_forward</span>
 </Link>
+</ScrollReveal>
 </div>
 </div>
 </section>
@@ -407,7 +430,8 @@ export default function HomePage() {
 <section className="w-full py-space-xl bg-surface-container-low">
 <div className="max-w-7xl mx-auto px-gutter">
 
-<div className="p-space-lg lg:p-space-xl rounded-3xl bg-surface-container-lowest shadow-[0_20px_50px_rgba(27,42,74,0.06)]">
+<ScrollReveal direction="zoom" delay={60}>
+<div className="p-space-lg lg:p-space-xl rounded-3xl bg-surface-container-lowest shadow-[0_20px_50px_rgba(27,42,74,0.06)] interactive-card hover:shadow-2xl transition-all duration-300">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
 
 <div className="lg:col-span-7 space-y-space-md">
@@ -435,7 +459,7 @@ export default function HomePage() {
 </div>
 
 <div className="lg:col-span-5 space-y-space-md">
-<div className="p-space-md lg:p-space-lg rounded-2xl bg-primary text-on-primary shadow-lg">
+<div className="p-space-md lg:p-space-lg rounded-2xl bg-primary text-on-primary shadow-lg interactive-card hover:scale-[1.02] transition-transform duration-300">
 <div className="mb-space-sm">
 <span className="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Results in 30 days</span>
 <h3 className="font-headline-md text-headline-md text-surface-bright mt-1">Focused outreach. Measurable outcomes.</h3>
@@ -467,11 +491,13 @@ export default function HomePage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </section>
 
 <section className="w-full py-space-xl bg-surface">
 <div className="max-w-5xl mx-auto px-gutter">
+<ScrollReveal direction="up" delay={50}>
 <div className="text-center space-y-space-xs mb-space-lg">
 <span className="font-label-sm text-label-sm px-3 py-1 rounded-full bg-secondary-container/20 text-secondary uppercase tracking-wider">
           Our approach
@@ -483,7 +509,9 @@ export default function HomePage() {
           A considered process from account research through campaign learning and refinement.
         </p>
 </div>
+</ScrollReveal>
 
+<ScrollReveal direction="zoom" delay={120}>
 <div
   className="relative overflow-hidden rounded-3xl bg-primary p-space-lg text-on-primary shadow-xl sm:p-space-xl"
   aria-roledescription="carousel"
@@ -550,6 +578,7 @@ export default function HomePage() {
     </button>
   </div>
 </div>
+</ScrollReveal>
 </div>
 </section>
 

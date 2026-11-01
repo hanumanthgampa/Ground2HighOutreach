@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
+import ScrollReveal from "../components/ScrollReveal";
 
 export default function ServicesPage() {
   return (
     <main className="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
       <div className="flex flex-col w-full">
 
+<section className="relative w-full py-space-xl overflow-hidden bg-gradient-to-b from-surface via-surface-container-low to-surface">
 
-
-<section className="relative px-gutter py-space-xl overflow-hidden bg-gradient-to-b from-surface via-surface-container-low to-surface">
-
-<div className="absolute top-0 right-0 w-[580px] h-[580px] rounded-full bg-secondary-container/10 blur-[130px] pointer-events-none -mr-40 -mt-20"></div>
-<div className="absolute bottom-0 left-10 w-[480px] h-[480px] rounded-full bg-tertiary-fixed-dim/15 blur-[110px] pointer-events-none"></div>
-<div className="max-w-7xl mx-auto w-full relative z-10">
+<div className="absolute top-0 right-0 w-[580px] h-[580px] rounded-full bg-secondary-container/10 blur-[130px] pointer-events-none -mr-40 -mt-20 animate-float-slow"></div>
+<div className="absolute bottom-0 left-10 w-[480px] h-[480px] rounded-full bg-tertiary-fixed-dim/15 blur-[110px] pointer-events-none animate-float-slow" style={{ animationDelay: "-6s" }}></div>
+<div className="max-w-7xl mx-auto px-gutter relative z-10">
+<ScrollReveal direction="left" delay={60}>
 <div className="max-w-3xl flex flex-col gap-space-sm mb-space-lg">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-container/10 text-on-tertiary-container w-fit font-label-sm text-label-sm uppercase tracking-widest">
 <span className="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
@@ -24,46 +24,50 @@ export default function ServicesPage() {
           We don’t offer cookie-cutter lead lists. We deploy targeted outbound systems, qualified engagement workflows, and revenue analytics built to fill your reps’ calendars with conversations worth having.
         </p>
 </div>
+</ScrollReveal>
 
+<ScrollReveal direction="up" delay={180}>
 <div className="grid grid-cols-2 md:grid-cols-4 gap-space-md p-space-md rounded-xl bg-surface-container-lowest/80 backdrop-blur-md shadow-sm border border-outline-variant/20 mb-space-lg">
-<div className="flex flex-col">
+<div className="flex flex-col p-2.5 rounded-lg hover:bg-surface-container/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm cursor-default group">
 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ACTIVE CLIENTS</span>
-<span className="font-headline-lg text-headline-lg text-primary mt-1">10+</span>
+<span className="font-headline-lg text-headline-lg text-primary mt-1 group-hover:text-secondary transition-colors">10+</span>
 <span className="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
-<span className="material-symbols-outlined text-[16px]">trending_up</span>Trusted Partners
+<span className="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">trending_up</span>Trusted Partners
           </span>
 </div>
-<div className="flex flex-col">
+<div className="flex flex-col p-2.5 rounded-lg hover:bg-surface-container/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm cursor-default group">
 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lead Deliverability</span>
-<span className="font-headline-lg text-headline-lg text-primary mt-1">99.2%</span>
+<span className="font-headline-lg text-headline-lg text-primary mt-1 group-hover:text-on-tertiary-container transition-colors">99.2%</span>
 <span className="font-body-sm text-body-sm text-on-tertiary-container flex items-center gap-1 mt-0.5">
-<span className="material-symbols-outlined text-[16px]">verified</span> SPF / DKIM / DMARC
+<span className="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">verified</span> SPF / DKIM / DMARC
           </span>
 </div>
-<div className="flex flex-col">
+<div className="flex flex-col p-2.5 rounded-lg hover:bg-surface-container/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm cursor-default group">
 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ON-TIME MEETING RATE
 </span>
-<span className="font-headline-lg text-headline-lg text-primary mt-1">98.4%</span>
+<span className="font-headline-lg text-headline-lg text-primary mt-1 group-hover:text-on-tertiary-container transition-colors">98.4%</span>
 <span className="font-body-sm text-body-sm text-on-tertiary-container flex items-center gap-1 mt-0.5">
-<span className="material-symbols-outlined text-[16px]">schedule</span>Punctual attendance
+<span className="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">schedule</span>Punctual attendance
           </span>
 </div>
-<div className="flex flex-col">
+<div className="flex flex-col p-2.5 rounded-lg hover:bg-surface-container/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm cursor-default group">
 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Time to First Meeting</span>
-<span className="font-headline-lg text-headline-lg text-secondary mt-1">&lt; 20 Days</span>
+<span className="font-headline-lg text-headline-lg text-secondary mt-1 group-hover:scale-105 transition-transform origin-left">&lt; 20 Days</span>
 <span className="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
-<span className="material-symbols-outlined text-[16px]">rocket_launch</span>Rapid Launch Sprint
+<span className="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">rocket_launch</span>Rapid Launch Sprint
           </span>
 </div>
 </div>
-
+</ScrollReveal>
 
 </div>
 </section>
 
-<section className="px-gutter py-space-xl max-w-7xl mx-auto w-full flex flex-col gap-space-xl">
+<section className="w-full py-space-xl">
+<div className="max-w-7xl mx-auto px-gutter flex flex-col gap-space-xl">
 
-<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300">
+<ScrollReveal direction="left">
+<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300 interactive-card hover:-translate-y-1 hover:shadow-xl hover:border-secondary-container/40">
 <div className="absolute top-0 left-0 w-1.5 h-full bg-secondary-container"></div>
 
 <div className="lg:w-7/12 flex flex-col justify-between gap-space-md">
@@ -201,8 +205,10 @@ export default function ServicesPage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300">
+<ScrollReveal direction="right">
+<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300 interactive-card hover:-translate-y-1 hover:shadow-xl hover:border-on-tertiary-container/40">
 <div className="absolute top-0 left-0 w-1.5 h-full bg-on-tertiary-container"></div>
 
 <div className="lg:w-5/12 flex flex-col justify-between bg-surface-container-high rounded-xl p-space-md border border-outline-variant/20 order-2 lg:order-1">
@@ -296,8 +302,10 @@ export default function ServicesPage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300">
+<ScrollReveal direction="left">
+<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300 interactive-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-fixed-dim/40">
 <div className="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
 
 <div className="lg:w-7/12 flex flex-col justify-between gap-space-md">
@@ -412,15 +420,18 @@ export default function ServicesPage() {
 </svg>
 </div>
 </div>
-<div className="p-space-xs rounded bg-surface-container text-on-surface-variant text-center font-body-sm text-body-sm">
+<div className="p-space-xs rounded bg-surface-container text-on-surface-variant text-center font-body-sm text-body-sm mt-space-sm">
           Updated in real-time across synced CRM pipelines.
         </div>
 </div>
 </div>
+</ScrollReveal>
+</div>
 </section>
 
-<section className="px-gutter py-space-xl bg-surface-container-low">
-<div className="max-w-7xl mx-auto w-full">
+<section className="w-full py-space-xl bg-surface-container-low overflow-hidden">
+<div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="zoom">
 <div className="text-center max-w-2xl mx-auto mb-space-lg space-y-space-xs">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm uppercase tracking-wider">
 <span className="material-symbols-outlined text-[16px]">auto_awesome</span>
@@ -470,7 +481,7 @@ export default function ServicesPage() {
 <h3 className="font-headline-sm text-headline-sm text-primary">More efficient campaign workflows</h3>
 <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Use automation to support repetitive campaign tasks, giving the team more time for thoughtful prospect engagement.</p>
 </div>
-<div className="p-space-md rounded-xl bg-primary text-on-primary shadow-sm">
+<div className="p-space-md rounded-xl bg-primary text-on-primary shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
 <div className="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center mb-space-sm">
 <span className="material-symbols-outlined text-[26px]" aria-hidden="true">verified_user</span>
 </div>
@@ -478,10 +489,215 @@ export default function ServicesPage() {
 <p className="font-body-sm text-body-sm text-on-primary-container mt-1">AI supports the process; our people make the final decisions and check outreach for relevance and quality.</p>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </section>
 
-<section className="px-gutter py-space-xl max-w-7xl mx-auto w-full">
+<section className="w-full py-space-xl">
+<div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="left" delay={50}>
+<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mb-space-lg">
+<div className="max-w-3xl space-y-space-xs">
+<div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container/15 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<span className="material-symbols-outlined text-[16px]">devices</span>
+        WEB DESIGN &amp; DEVELOPMENT PROCESS
+      </div>
+<h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
+        Six steps from concept to launch with weekly updates at every stage.
+      </h2>
+<p className="font-body-md text-body-md text-on-surface-variant">
+        High-performing outbound campaigns require a high-converting digital storefront. Here is our disciplined web design and engineering process—built for total transparency, rapid iteration, and reliable launch execution.
+      </p>
+</div>
+<div className="flex items-center gap-2 px-space-sm py-2 rounded-xl bg-surface-container border border-outline-variant/20 text-on-surface font-label-sm text-label-sm shrink-0 shadow-sm hover:shadow-md transition-shadow">
+<span className="w-2.5 h-2.5 rounded-full bg-secondary-container animate-ping"></span>
+<span className="font-semibold text-primary">Custom UI/UX Design</span>
+<span className="text-on-surface-variant">• Clean Responsive Build</span>
+</div>
+</div>
+</ScrollReveal>
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<ScrollReveal direction="up" delay={50} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl hover:border-secondary-container/50 transition-all duration-300 group h-full">
+<div className="space-y-space-sm">
+<div className="flex items-center justify-between">
+<span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">
+            STEP 01
+          </span>
+<div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300 group-hover:scale-110">
+<span className="material-symbols-outlined text-[20px]">travel_explore</span>
+</div>
+</div>
+<h3 className="font-headline-lg text-headline-lg text-primary tracking-tight group-hover:text-secondary transition-colors">Discovery</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Audit competitors, establish success metrics, and lock in scope and timeline.
+        </p>
+</div>
+<div className="mt-space-md pt-space-sm border-t border-outline-variant/10 flex flex-wrap gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Competitor Audit
+        </span>
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Scope &amp; Timeline
+        </span>
+</div>
+</div>
+</ScrollReveal>
+
+<ScrollReveal direction="up" delay={130} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl hover:border-secondary-container/50 transition-all duration-300 group h-full">
+<div className="space-y-space-sm">
+<div className="flex items-center justify-between">
+<span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">
+            STEP 02
+          </span>
+<div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300 group-hover:scale-110">
+<span className="material-symbols-outlined text-[20px]">palette</span>
+</div>
+</div>
+<h3 className="font-headline-lg text-headline-lg text-primary tracking-tight group-hover:text-secondary transition-colors">Design</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Wireframes, high-fidelity mockups, and a consistent design system.
+        </p>
+</div>
+<div className="mt-space-md pt-space-sm border-t border-outline-variant/10 flex flex-wrap gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Wireframes &amp; UX
+        </span>
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Design System
+        </span>
+</div>
+</div>
+</ScrollReveal>
+
+<ScrollReveal direction="up" delay={210} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl hover:border-secondary-container/50 transition-all duration-300 group h-full">
+<div className="space-y-space-sm">
+<div className="flex items-center justify-between">
+<span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">
+            STEP 03
+          </span>
+<div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300 group-hover:scale-110">
+<span className="material-symbols-outlined text-[20px]">code</span>
+</div>
+</div>
+<h3 className="font-headline-lg text-headline-lg text-primary tracking-tight group-hover:text-secondary transition-colors">Development</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Clean, responsive build with an intuitive CMS your team can easily manage.
+        </p>
+</div>
+<div className="mt-space-md pt-space-sm border-t border-outline-variant/10 flex flex-wrap gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Responsive Build
+        </span>
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Intuitive CMS
+        </span>
+</div>
+</div>
+</ScrollReveal>
+
+<ScrollReveal direction="up" delay={100} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl hover:border-secondary-container/50 transition-all duration-300 group h-full">
+<div className="space-y-space-sm">
+<div className="flex items-center justify-between">
+<span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">
+            STEP 04
+          </span>
+<div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300 group-hover:scale-110">
+<span className="material-symbols-outlined text-[20px]">fact_check</span>
+</div>
+</div>
+<h3 className="font-headline-lg text-headline-lg text-primary tracking-tight group-hover:text-secondary transition-colors">Testing</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Thorough checks across browsers, mobile devices, performance, and accessibility.
+        </p>
+</div>
+<div className="mt-space-md pt-space-sm border-t border-outline-variant/10 flex flex-wrap gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Cross-Browser QA
+        </span>
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Performance &amp; A11y
+        </span>
+</div>
+</div>
+</ScrollReveal>
+
+<ScrollReveal direction="up" delay={180} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl hover:border-secondary-container/50 transition-all duration-300 group h-full">
+<div className="space-y-space-sm">
+<div className="flex items-center justify-between">
+<span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">
+            STEP 05
+          </span>
+<div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300 group-hover:scale-110">
+<span className="material-symbols-outlined text-[20px]">rocket_launch</span>
+</div>
+</div>
+<h3 className="font-headline-lg text-headline-lg text-primary tracking-tight group-hover:text-secondary transition-colors">Launch</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Smooth deployment with zero downtime and immediate smoke tests.
+        </p>
+</div>
+<div className="mt-space-md pt-space-sm border-t border-outline-variant/10 flex flex-wrap gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Zero Downtime
+        </span>
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Smoke Testing
+        </span>
+</div>
+</div>
+</ScrollReveal>
+
+<ScrollReveal direction="up" delay={260} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl hover:border-secondary-container/50 transition-all duration-300 group h-full">
+<div className="space-y-space-sm">
+<div className="flex items-center justify-between">
+<span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">
+            STEP 06
+          </span>
+<div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container group-hover:text-primary transition-all duration-300 group-hover:scale-110">
+<span className="material-symbols-outlined text-[20px]">support_agent</span>
+</div>
+</div>
+<h3 className="font-headline-lg text-headline-lg text-primary tracking-tight group-hover:text-secondary transition-colors">Support</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Included post-launch warranty, plus flexible maintenance plans for the long run.
+        </p>
+</div>
+<div className="mt-space-md pt-space-sm border-t border-outline-variant/10 flex flex-wrap gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Post-Launch Warranty
+        </span>
+<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-[11px] group-hover:bg-surface-container-high transition-colors">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          Maintenance Plans
+        </span>
+</div>
+</div>
+</ScrollReveal>
+</div>
+</div>
+</section>
+
+<section className="w-full py-space-xl">
+<div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="left" delay={50}>
 <div className="max-w-3xl mb-space-lg space-y-space-xs">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container/15 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
 <span className="material-symbols-outlined text-[16px]">timeline</span>
@@ -494,10 +710,12 @@ export default function ServicesPage() {
         No 12-month lock-in contracts. We prove commercial value fast, systematically validating messaging before compounding top-of-funnel output.
       </p>
 </div>
+</ScrollReveal>
 
 <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
 
-<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden">
+<ScrollReveal direction="up" delay={50} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full">
 <div className="space-y-space-sm">
 <div className="flex items-center justify-between">
 <span className="font-label-sm text-label-sm bg-secondary-container/20 text-secondary px-space-xs py-0.5 rounded font-bold">WEEKS 1–2</span>
@@ -526,8 +744,10 @@ export default function ServicesPage() {
           Focus: Foundation, deliverability &amp; alignment.
         </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-md border-2 border-primary/20 flex flex-col justify-between relative overflow-hidden">
+<ScrollReveal direction="up" delay={180} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-md border-2 border-primary/20 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full">
 <div className="absolute top-0 right-0 bg-primary text-surface font-label-sm text-label-sm px-space-sm py-1 rounded-bl">
           CORE PHASE
         </div>
@@ -559,8 +779,10 @@ export default function ServicesPage() {
           Focus: Consistent qualified meeting flow.
         </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden">
+<ScrollReveal direction="up" delay={300} className="h-full">
+<div className="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 flex flex-col justify-between relative overflow-hidden interactive-card hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full">
 <div className="space-y-space-sm">
 <div className="flex items-center justify-between">
 <span className="font-label-sm text-label-sm bg-on-tertiary-container/20 text-on-tertiary-container px-space-xs py-0.5 rounded font-bold">MONTHS 3–6+</span>
@@ -589,14 +811,18 @@ export default function ServicesPage() {
           Focus: Maximum enterprise revenue efficiency.
         </div>
 </div>
+</ScrollReveal>
+</div>
 </div>
 </section>
 
-<section className="px-gutter py-space-xl bg-primary text-surface relative overflow-hidden">
+<section className="w-full py-space-xl bg-primary text-surface relative overflow-hidden">
 
-<div className="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-secondary-container/20 blur-[100px] pointer-events-none"></div>
-<div className="absolute left-10 top-0 w-80 h-80 rounded-full bg-tertiary-fixed-dim/10 blur-[90px] pointer-events-none"></div>
-<div className="max-w-5xl mx-auto w-full relative z-10 text-center flex flex-col items-center gap-space-md">
+<div className="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-secondary-container/20 blur-[100px] pointer-events-none animate-float-slow"></div>
+<div className="absolute left-10 top-0 w-80 h-80 rounded-full bg-tertiary-fixed-dim/10 blur-[90px] pointer-events-none animate-float-slow" style={{ animationDelay: "-5s" }}></div>
+<div className="max-w-5xl mx-auto px-gutter relative z-10 text-center flex flex-col items-center gap-space-md">
+<ScrollReveal direction="zoom">
+<div className="flex flex-col items-center gap-space-md">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm uppercase tracking-wider">
 <span className="material-symbols-outlined text-[16px]">verified</span>
         NO LONG-TERM CONTRACTS • PERFORMANCE-ALIGNED
@@ -608,16 +834,18 @@ export default function ServicesPage() {
         Book your strategic pipeline consultation today. We’ll review your target accounts, evaluate your current deliverability setup, and map out a bespoke roadmap.
       </p>
 <div className="flex flex-col sm:flex-row items-center gap-space-sm pt-space-xs">
-<Link className="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-105 active:scale-95 transition-all shadow-[0_8px_24px_rgba(254,152,50,0.35)]" to="/contact">
+<Link className="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-110 hover:shadow-[0_12px_28px_rgba(254,152,50,0.4)] active:scale-95 transition-all shadow-[0_8px_24px_rgba(254,152,50,0.35)] group" to="/contact">
 <span className="">Book a Strategy Call</span>
-<span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+<span className="material-symbols-outlined text-[18px] group-hover:translate-x-1.5 transition-transform duration-200">arrow_forward</span>
 </Link>
 </div>
-<div className="flex items-center gap-space-md text-on-primary-container font-label-sm text-label-sm pt-space-sm">
-<span className="flex items-center gap-1"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> 30-Minute Executive Session</span>
-<span className="flex items-center gap-1"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> ICP Benchmark Included</span>
-<span className="flex items-center gap-1"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Zero Sales Pressure</span>
+<div className="flex flex-wrap justify-center items-center gap-space-md text-on-primary-container font-label-sm text-label-sm pt-space-sm">
+<span className="flex items-center gap-1 hover:text-surface transition-colors"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> 30-Minute Executive Session</span>
+<span className="flex items-center gap-1 hover:text-surface transition-colors"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> ICP Benchmark Included</span>
+<span className="flex items-center gap-1 hover:text-surface transition-colors"><span className="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Zero Sales Pressure</span>
 </div>
+</div>
+</ScrollReveal>
 </div>
 </section>
 </div>

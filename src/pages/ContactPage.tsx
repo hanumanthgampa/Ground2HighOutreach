@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
+import ScrollReveal from "../components/ScrollReveal";
 
 const meetingSlots = ["10:00 AM", "1:30 PM", "3:00 PM"];
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata";
@@ -185,11 +187,23 @@ export default function ContactPage() {
   };
   const handleTimeZoneChange = (timeZone: string) => {
     setSelectedTimeZone(timeZone);
-    setSelectedDate("");
-    setSelectedSlot("");
-    setCustomTime("");
-    setMeetingPreferenceAdded(false);
-    setCalendarMonth(monthStart(dateFromKey(getDateKeyInTimeZone(timeZone))));
+    const newTodayDateKey = getDateKeyInTimeZone(timeZone);
+    const newMaxDateKey = addDays(newTodayDateKey, 90);
+    const newEarliestMonth = monthStart(dateFromKey(newTodayDateKey));
+    const newLatestMonth = monthStart(dateFromKey(newMaxDateKey));
+
+    if (monthKey(calendarMonth) < monthKey(newEarliestMonth)) {
+      setCalendarMonth(newEarliestMonth);
+    } else if (monthKey(calendarMonth) > monthKey(newLatestMonth)) {
+      setCalendarMonth(newLatestMonth);
+    }
+
+    if (selectedDate && (selectedDate <= newTodayDateKey || selectedDate > newMaxDateKey)) {
+      setSelectedDate("");
+      setSelectedSlot("");
+      setCustomTime("");
+      setMeetingPreferenceAdded(false);
+    }
   };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -258,50 +272,67 @@ export default function ContactPage() {
 
   return (
     <main className="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
-      {showSuccessToast && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-primary/35 p-4 backdrop-blur-sm">
+      {showSuccessToast &&
+        typeof document !== "undefined" &&
+        createPortal(
           <div
-            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-br from-white via-[#fff8ee] to-[#fff0dc] px-7 py-10 text-center shadow-[0_24px_80px_rgba(4,21,52,0.28)] sm:px-12 sm:py-14"
-            role="status"
-            aria-live="polite"
+            className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-primary/40 p-4 pt-20 sm:pt-24 backdrop-blur-sm transition-all"
+            onClick={() => setShowSuccessToast(false)}
           >
-            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-secondary-container/25 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-tertiary-container/20 blur-3xl" />
-            <button
-              className="absolute right-4 top-4 rounded-full p-2 text-on-surface-variant transition-colors hover:bg-primary/5"
-              type="button"
-              aria-label="Dismiss notification"
-              onClick={() => setShowSuccessToast(false)}
+            <div
+              className="relative my-auto w-full max-w-lg overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-br from-white via-[#fff8ee] to-[#fff0dc] px-7 py-9 text-center shadow-[0_24px_80px_rgba(4,21,52,0.32)] sm:px-10 sm:py-12"
+              role="status"
+              aria-live="polite"
+              onClick={(e) => e.stopPropagation()}
             >
-              <span className="material-symbols-outlined text-[22px]" aria-hidden="true">
-                close
-              </span>
-            </button>
-            <div className="relative mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#fe9832] to-[#ffbd66] text-white shadow-lg shadow-[#fe9832]/30">
-              <span className="material-symbols-outlined text-[44px]" aria-hidden="true">
-                check
-              </span>
+              <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-secondary-container/25 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-tertiary-container/20 blur-3xl" />
+              <button
+                className="absolute right-4 top-4 rounded-full p-2 text-on-surface-variant transition-colors hover:bg-primary/5 focus:outline-none"
+                type="button"
+                aria-label="Dismiss notification"
+                onClick={() => setShowSuccessToast(false)}
+              >
+                <span className="material-symbols-outlined text-[22px]" aria-hidden="true">
+                  close
+                </span>
+              </button>
+              <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#fe9832] to-[#ffbd66] text-white shadow-lg shadow-[#fe9832]/30">
+                <span className="material-symbols-outlined text-[36px]" aria-hidden="true">
+                  check
+                </span>
+              </div>
+              <p className="relative mb-2 font-label-sm text-label-sm font-bold uppercase tracking-[0.2em] text-secondary">
+                Message delivered
+              </p>
+              <h2 className="relative font-headline-xl text-headline-xl text-primary">
+                Thank you for reaching out!
+              </h2>
+              <p className="relative mx-auto mt-3 max-w-sm font-body-md text-body-md leading-relaxed text-on-surface-variant">
+                Your request has been sent. If you included a preferred time, our team will confirm availability by email.
+              </p>
+              <div className="relative mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowSuccessToast(false)}
+                  className="px-6 py-2.5 rounded-full bg-primary text-surface font-label-md text-label-md hover:bg-primary/90 transition-all active:scale-95 shadow-sm"
+                >
+                  Got it, thank you!
+                </button>
+              </div>
             </div>
-            <p className="relative mb-2 font-label-sm text-label-sm font-bold uppercase tracking-[0.2em] text-secondary">
-              Message delivered
-            </p>
-            <h2 className="relative font-headline-xl text-headline-xl text-primary">
-              Thank you for reaching out!
-            </h2>
-            <p className="relative mx-auto mt-3 max-w-sm font-body-md text-body-md leading-relaxed text-on-surface-variant">
-              Your request has been sent. If you included a preferred time, our team will confirm availability by email.
-            </p>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
       <div className="flex flex-col w-full">
 
 <section className="relative w-full overflow-hidden pb-space-xl">
 
-<div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-secondary-container/10 blur-[120px] rounded-full"></div>
-<div className="pointer-events-none absolute top-48 right-12 w-[420px] h-[320px] bg-tertiary-fixed/15 blur-[100px] rounded-full"></div>
+<div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-secondary-container/10 blur-[120px] rounded-full animate-float-slow"></div>
+<div className="pointer-events-none absolute top-48 right-12 w-[420px] h-[320px] bg-tertiary-fixed/15 blur-[100px] rounded-full animate-float-slow" style={{ animationDelay: "-5s" }}></div>
 <div className="max-w-7xl mx-auto px-gutter relative z-10 pt-space-lg">
 
+<ScrollReveal direction="left" delay={50}>
 <div className="max-w-3xl mb-space-xl">
 <div className="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-tertiary-container text-on-tertiary-container shadow-sm mb-space-sm">
 <span className="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
@@ -335,12 +366,15 @@ export default function ContactPage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
 
 <div className="lg:col-span-5 flex flex-col gap-space-md">
+<ScrollReveal direction="left" delay={120}>
+<div className="flex flex-col gap-space-md">
 
-<div className="bg-surface-container-lowest/95 backdrop-blur-xl rounded-xl p-space-md shadow-xl flex flex-col gap-space-md">
+<div className="bg-surface-container-lowest/95 backdrop-blur-xl rounded-xl p-space-md shadow-xl flex flex-col gap-space-md interactive-card hover:shadow-2xl transition-all duration-300">
 <div className="flex items-start justify-between gap-space-sm pb-space-sm">
 <div>
 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/15 text-secondary font-label-sm text-label-sm mb-1">
@@ -546,17 +580,20 @@ export default function ContactPage() {
 
 </div>
 
-<div className="relative rounded-xl overflow-hidden shadow-lg h-48 bg-primary">
-<img alt="Executives discussing business growth in a modern boardroom" className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition-all duration-500" src="/images/contact-boardroom.webp" width="512" height="279" loading="lazy" decoding="async" />
+<div className="relative rounded-xl overflow-hidden shadow-lg h-48 bg-primary group">
+<img alt="Executives discussing business growth in a modern boardroom" className="w-full h-full object-cover opacity-80 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105 transition-all duration-500" src="/images/contact-boardroom.webp" width="512" height="279" loading="lazy" decoding="async" />
 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent p-space-sm flex flex-col justify-end text-on-primary">
 <span className="font-label-sm text-label-sm text-secondary-container uppercase">Strategic Alignment</span>
 <p className="font-headline-sm text-headline-sm text-on-primary leading-snug">From Ground 2 High-Growth Revenue.</p>
 </div>
 </div>
 </div>
+</ScrollReveal>
+</div>
 
 <div className="lg:col-span-7">
-<div className="bg-surface-container-lowest/95 backdrop-blur-2xl rounded-2xl p-space-md md:p-space-lg shadow-2xl relative">
+<ScrollReveal direction="right" delay={180}>
+<div className="bg-surface-container-lowest/95 backdrop-blur-2xl rounded-2xl p-space-md md:p-space-lg shadow-2xl relative interactive-card hover:shadow-2xl transition-all duration-300">
 <div className="mb-space-md">
 <span className="inline-flex items-center gap-2 font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wide">
   <span className="relative flex h-3 w-3" aria-hidden="true">
@@ -599,7 +636,7 @@ export default function ContactPage() {
 />
 {meetingPreferenceAdded && (
   <div className="rounded-lg bg-secondary-container/20 px-space-sm py-2 text-primary font-body-sm text-body-sm" role="status">
-    Preferred call time: {formatMeetingDate(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")} at {formatMeetingSlot(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")} IST. Your time zone: {selectedTimeZone}. We’ll confirm availability after receiving your request.
+    Preferred call time: {formatMeetingDate(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")} at {formatMeetingSlot(selectedDate, selectedSlot, selectedTimeZone, "Asia/Kolkata")}. Your time zone: {selectedTimeZone}. We’ll confirm availability after receiving your request.
   </div>
 )}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
@@ -686,6 +723,7 @@ export default function ContactPage() {
 </form>
 
 </div>
+</ScrollReveal>
 </div>
 </div>
 
@@ -714,6 +752,7 @@ export default function ContactPage() {
 </div> */}
 
 <div className="mt-space-xl pt-space-lg">
+<ScrollReveal direction="zoom" delay={50}>
 <div className="text-center max-w-2xl mx-auto mb-space-lg">
 <span className="font-label-sm text-label-sm text-secondary uppercase font-semibold tracking-wider">Predictable Process</span>
 <h2 className="font-headline-xl text-headline-xl text-primary mt-1">What happens after you reach out?</h2>
@@ -721,9 +760,11 @@ export default function ContactPage() {
             No endless sales hurdles. We value your time with a structured, transparent three-stage onboarding ramp.
           </p>
 </div>
+</ScrollReveal>
 <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md relative">
 
-<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-md relative overflow-hidden flex flex-col justify-between">
+<ScrollReveal direction="up" delay={50} className="h-full">
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-md relative overflow-hidden flex flex-col justify-between h-full">
 <div>
 <div className="flex items-center justify-between mb-space-sm">
 <span className="font-headline-2xl text-headline-2xl text-primary/10 font-black leading-none">01</span>
@@ -739,8 +780,10 @@ export default function ContactPage() {
 <span className="">Mutual Alignment Check</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-md relative overflow-hidden flex flex-col justify-between">
+<ScrollReveal direction="up" delay={150} className="h-full">
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-md relative overflow-hidden flex flex-col justify-between h-full">
 <div>
 <div className="flex items-center justify-between mb-space-sm">
 <span className="font-headline-2xl text-headline-2xl text-secondary/20 font-black leading-none">02</span>
@@ -756,8 +799,10 @@ export default function ContactPage() {
 <span className="">Requirement Blueprint</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-md relative overflow-hidden flex flex-col justify-between">
+<ScrollReveal direction="up" delay={250} className="h-full">
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-md relative overflow-hidden flex flex-col justify-between h-full">
 <div>
 <div className="flex items-center justify-between mb-space-sm">
 <span className="font-headline-2xl text-headline-2xl text-primary/10 font-black leading-none">03</span>
@@ -773,10 +818,12 @@ export default function ContactPage() {
 <span className="">Swift Meeting Generation</span>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </div>
 
-<div className="mt-space-xl p-space-lg rounded-2xl bg-primary text-on-primary shadow-xl flex flex-col md:flex-row items-center justify-between gap-space-md">
+<ScrollReveal direction="zoom" delay={150}>
+<div className="mt-space-xl p-space-lg rounded-2xl bg-primary text-on-primary shadow-xl flex flex-col md:flex-row items-center justify-between gap-space-md interactive-card hover:shadow-2xl transition-all duration-300">
 <div className="space-y-1 max-w-xl">
 <p className="font-headline-md text-headline-md text-surface tracking-tight">
             “It finally felt like someone owned our top-of-funnel.”
@@ -786,11 +833,12 @@ export default function ContactPage() {
           </p>
 </div>
 <div className="flex flex-col sm:flex-row items-center gap-space-sm flex-shrink-0 w-full sm:w-auto">
-<a className="w-full sm:w-auto px-space-md py-2.5 rounded-full bg-surface-container-low text-primary font-headline-sm text-label-md hover:bg-surface transition-all text-center" href="mailto:sales@g2houtreach.com">
+<a className="w-full sm:w-auto px-space-md py-2.5 rounded-full bg-surface-container-low text-primary font-headline-sm text-label-md hover:bg-surface hover:shadow-md hover:scale-105 active:scale-95 transition-all text-center" href="mailto:sales@g2houtreach.com">
             Email Us Directly
           </a>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </section>
 

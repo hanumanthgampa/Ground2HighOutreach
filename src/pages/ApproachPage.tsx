@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import ScrollReveal from "../components/ScrollReveal";
 
 export default function ApproachPage() {
   
@@ -10,13 +11,14 @@ export default function ApproachPage() {
 
 <section className="relative w-full py-space-xl overflow-hidden bg-surface">
 
-<div className="absolute -top-32 right-[-5%] w-[450px] h-[450px] rounded-full bg-secondary-container/10 blur-[100px] pointer-events-none"></div>
-<div className="absolute top-1/2 left-[-10%] w-[500px] h-[500px] rounded-full bg-on-tertiary-container/10 blur-[120px] pointer-events-none"></div>
+<div className="absolute -top-32 right-[-5%] w-[450px] h-[450px] rounded-full bg-secondary-container/10 blur-[100px] pointer-events-none animate-float-slow"></div>
+<div className="absolute top-1/2 left-[-10%] w-[500px] h-[500px] rounded-full bg-on-tertiary-container/10 blur-[120px] pointer-events-none animate-float-slow" style={{ animationDelay: "-6s" }}></div>
 <div className="max-w-7xl mx-auto px-gutter relative z-10">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
 
 <div className="lg:col-span-7 flex flex-col items-start gap-space-md">
-
+<ScrollReveal direction="left" delay={50}>
+<div className="flex flex-col items-start gap-space-md">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container-high shadow-sm">
 <span className="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
 <span className="font-label-md text-label-md text-primary tracking-wider uppercase font-semibold">OUR METHODOLOGY &amp; PHILOSOPHY</span>
@@ -28,34 +30,37 @@ export default function ApproachPage() {
             Most outbound fails because of generic scraped lists and blast templates. Here is the disciplined, data-backed 4-phase methodology that powers reliable client revenue engines.
           </p>
 <div className="pt-space-xs flex flex-wrap items-center gap-space-md">
-<Link className="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-secondary-container text-primary font-headline-sm text-body-md hover:brightness-105 active:scale-95 transition-all shadow-[0_8px_20px_rgba(254,152,50,0.28)]" to="/contact">
+<Link className="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-secondary-container text-primary font-headline-sm text-body-md hover:brightness-110 active:scale-95 transition-all shadow-[0_8px_20px_rgba(254,152,50,0.28)] group" to="/contact">
 <span className="">Book a Strategy Call</span>
-<span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+<span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </Link>
-<div className="flex items-center gap-space-xs px-space-md py-space-sm rounded-full bg-surface-container text-primary font-label-md text-label-md">
+<div className="flex items-center gap-space-xs px-space-md py-space-sm rounded-full bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors">
 <span className="material-symbols-outlined text-[18px] text-tertiary-container">verified</span>
 <span className="">Zero Long-Term Contracts</span>
 </div>
 </div>
 
 <div className="grid grid-cols-3 gap-space-md pt-space-md w-full max-w-xl">
-<div className="bg-surface-container-low p-space-sm rounded-xl shadow-sm">
+<div className="bg-surface-container-low p-space-sm rounded-xl shadow-sm interactive-card hover:-translate-y-1 hover:shadow-md transition-all duration-300">
 <p className="font-headline-lg text-headline-lg text-primary">820+</p>
 <p className="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Tier-1 Accounts Mapped</p>
 </div>
-<div className="bg-surface-container-low p-space-sm rounded-xl shadow-sm">
+<div className="bg-surface-container-low p-space-sm rounded-xl shadow-sm interactive-card hover:-translate-y-1 hover:shadow-md transition-all duration-300">
 <p className="font-headline-lg text-headline-lg text-secondary">88.4%</p>
 <p className="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Verified Show-Up Rate</p>
 </div>
-<div className="bg-surface-container-low p-space-sm rounded-xl shadow-sm">
+<div className="bg-surface-container-low p-space-sm rounded-xl shadow-sm interactive-card hover:-translate-y-1 hover:shadow-md transition-all duration-300">
 <p className="font-headline-lg text-headline-lg text-primary">3-6 mo</p>
 <p className="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Typical Cohort Sizing</p>
 </div>
 </div>
 </div>
+</ScrollReveal>
+</div>
 
 <div className="lg:col-span-5 relative">
-<div className="bg-surface-container-lowest/90 backdrop-blur-xl rounded-2xl p-space-lg shadow-xl relative z-10">
+<ScrollReveal direction="right" delay={150}>
+<div className="bg-surface-container-lowest/90 backdrop-blur-xl rounded-2xl p-space-lg shadow-xl relative z-10 interactive-card hover:shadow-2xl transition-all duration-300">
 <div className="flex items-center justify-between pb-space-sm mb-space-md">
 <div className="flex items-center gap-space-xs">
 <span className="material-symbols-outlined text-secondary-container text-[22px]">architecture</span>
@@ -123,6 +128,7 @@ export default function ApproachPage() {
               </p>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </div>
 </div>
@@ -131,6 +137,7 @@ export default function ApproachPage() {
 <section className="w-full py-space-xl bg-surface-container-low">
 <div className="max-w-7xl mx-auto px-gutter">
 
+<ScrollReveal direction="left" delay={50}>
 <div className="max-w-3xl mb-space-xl">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-highest text-primary font-label-md text-label-md mb-space-xs font-semibold">
 <span className="material-symbols-outlined text-[16px] text-secondary">linear_scale</span>
@@ -143,10 +150,12 @@ export default function ApproachPage() {
           From cold TAM research to verified executive sales conversations on your calendar in under 3 weeks.
         </p>
 </div>
+</ScrollReveal>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md relative">
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<ScrollReveal direction="up" delay={50} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full">
 <div>
 <div className="flex items-center justify-between mb-space-md">
 <span className="px-space-xs py-1 rounded-full bg-primary text-surface font-label-sm text-label-sm font-bold">PHASE 01</span>
@@ -180,8 +189,10 @@ export default function ApproachPage() {
 <span className="font-label-sm text-label-sm text-primary font-bold">Deliverable: Verified ICP Matrix</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<ScrollReveal direction="up" delay={140} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full">
 <div>
 <div className="flex items-center justify-between mb-space-md">
 <span className="px-space-xs py-1 rounded-full bg-secondary-container text-primary font-label-sm text-label-sm font-bold">PHASE 02</span>
@@ -215,8 +226,10 @@ export default function ApproachPage() {
 <span className="font-label-sm text-label-sm text-primary font-bold">Deliverable: Safe Technical Stack</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<ScrollReveal direction="up" delay={230} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full">
 <div>
 <div className="flex items-center justify-between mb-space-md">
 <span className="px-space-xs py-1 rounded-full bg-primary-container text-surface font-label-sm text-label-sm font-bold">PHASE 03</span>
@@ -250,8 +263,10 @@ export default function ApproachPage() {
 <span className="font-label-sm text-label-sm text-primary font-bold">Deliverable: Qualified Meetings</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<ScrollReveal direction="up" delay={320} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-md flex flex-col justify-between hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full">
 <div>
 <div className="flex items-center justify-between mb-space-md">
 <span className="px-space-xs py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm font-bold">PHASE 04</span>
@@ -285,12 +300,14 @@ export default function ApproachPage() {
 <span className="font-label-sm text-label-sm text-primary font-bold">Deliverable: Predictable Pipeline</span>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </div>
 </section>
 
 <section className="w-full py-space-xl bg-surface">
 <div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="zoom" delay={50}>
 <div className="text-center max-w-2xl mx-auto mb-space-xl">
 <span className="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">RADICAL CONTRAST</span>
 <h2 className="font-headline-xl text-headline-xl text-primary mt-1">Why Our Approach Is Different</h2>
@@ -298,10 +315,12 @@ export default function ApproachPage() {
           Outbound has evolved beyond blunt automation. See how our bespoke engineering outperforms legacy volume plays.
         </p>
 </div>
+</ScrollReveal>
 
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
 
-<div className="bg-surface-container p-space-lg rounded-2xl shadow-sm">
+<ScrollReveal direction="left" delay={100} className="h-full">
+<div className="bg-surface-container p-space-lg rounded-2xl shadow-sm h-full">
 <div className="flex items-center gap-space-xs mb-space-md">
 <div className="w-10 h-10 rounded-full bg-error-container/30 flex items-center justify-center text-error">
 <span className="material-symbols-outlined text-[22px]">cancel</span>
@@ -344,8 +363,10 @@ export default function ApproachPage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-primary text-surface p-space-lg rounded-2xl shadow-xl relative overflow-hidden">
+<ScrollReveal direction="right" delay={180} className="h-full">
+<div className="bg-primary text-surface p-space-lg rounded-2xl shadow-xl relative overflow-hidden h-full">
 <div className="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-secondary-container/10 blur-[80px]"></div>
 <div className="flex items-center gap-space-xs mb-space-md">
 <div className="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold">
@@ -404,12 +425,14 @@ export default function ApproachPage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </div>
 </section>
 
 <section className="w-full py-space-xl bg-surface-container-low">
 <div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="left" delay={50}>
 <div className="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
 <div>
 <span className="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">CLIENT COLLABORATION EXPERIENCE</span>
@@ -421,10 +444,12 @@ export default function ApproachPage() {
           Think of us as the focused extension of your revenue team who quietly keeps the top of your funnel in motion.
         </p>
 </div>
+</ScrollReveal>
 
 <div className="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between">
+<ScrollReveal direction="up" delay={50} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between h-full">
 <div>
 <div className="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary mb-space-md">
 <span className="material-symbols-outlined text-[26px]">forum</span>
@@ -441,8 +466,10 @@ export default function ApproachPage() {
 <span className="">Real-time communication &amp; fast approvals</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between">
+<ScrollReveal direction="up" delay={150} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between h-full">
 <div>
 <div className="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary mb-space-md">
 <span className="material-symbols-outlined text-[26px]">dashboard_customize</span>
@@ -459,8 +486,10 @@ export default function ApproachPage() {
 <span className="">100% operational transparency</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between">
+<ScrollReveal direction="up" delay={250} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between h-full">
 <div>
 <div className="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary mb-space-md">
 <span className="material-symbols-outlined text-[26px]">event_available</span>
@@ -477,8 +506,10 @@ export default function ApproachPage() {
 <span className="">Reps log in to ready-to-talk prospects</span>
 </div>
 </div>
+</ScrollReveal>
 
-<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between">
+<ScrollReveal direction="up" delay={350} className="h-full">
+<div className="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between h-full">
 <div>
 <div className="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary mb-space-md">
 <span className="material-symbols-outlined text-[26px]">psychology</span>
@@ -495,12 +526,14 @@ export default function ApproachPage() {
 <span className="">Continuous market feedback compounding</span>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </div>
 </section>
 
 <section className="w-full py-space-xl bg-surface">
 <div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="zoom" delay={60}>
 <div className="relative bg-primary-container text-surface rounded-3xl p-space-lg lg:p-space-xl overflow-hidden shadow-2xl">
 
 <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-container/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -539,11 +572,13 @@ export default function ApproachPage() {
 </div>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </section>
 
 <section className="w-full py-space-xl bg-surface-container-low">
 <div className="max-w-7xl mx-auto px-gutter">
+<ScrollReveal direction="up" delay={50}>
 <div className="bg-surface-container-lowest rounded-3xl p-space-lg lg:p-space-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-space-lg">
 <div className="space-y-space-xs max-w-2xl">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md font-semibold">
@@ -564,6 +599,7 @@ export default function ApproachPage() {
 </Link>
 </div>
 </div>
+</ScrollReveal>
 </div>
 </section>
 </div>

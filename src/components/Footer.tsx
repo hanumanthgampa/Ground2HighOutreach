@@ -90,15 +90,18 @@ export default function Footer() {
               and around the world.
             </p>
             <div className="flex items-center gap-space-xs">
-              <span
-                aria-label="LinkedIn"
-                className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary"
-                role="img"
+              <a
+                aria-label="Follow G2H Outreach on LinkedIn"
+                className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary hover:bg-[#0A66C2] hover:text-white transition-all duration-200 active:scale-95 shadow-sm"
+                href="https://www.linkedin.com/company/ground2high-outreach/posts/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Follow G2H Outreach on LinkedIn"
               >
                 <svg aria-hidden="true" className="h-[18px] w-[18px] fill-current" viewBox="0 0 24 24">
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.34 17.5V9.88H5.8v7.62h2.54ZM7.07 8.84c.84 0 1.36-.56 1.36-1.26-.02-.72-.52-1.27-1.34-1.27s-1.36.55-1.36 1.27c0 .7.52 1.26 1.32 1.26h.02Zm5.18 8.66v-4.26c0-.23.02-.46.09-.63.18-.46.59-.94 1.28-.94.9 0 1.26.7 1.26 1.72v4.11h2.54v-4.37c0-2.34-1.25-3.43-2.92-3.43-1.35 0-1.95.75-2.29 1.27v-1.09H9.67c.03.72 0 7.62 0 7.62h2.58Z" />
                 </svg>
-              </span>
+              </a>
               <a
                 aria-label="Direct inquiries by email"
                 className="inline-flex w-9 h-9 rounded-full bg-primary items-center justify-center text-on-primary hover:bg-secondary-container hover:text-primary transition-colors"
