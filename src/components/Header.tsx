@@ -34,7 +34,7 @@ export default function Header() {
           </Link>
         </div>
         <nav
-          className="hidden md:flex items-center gap-space-xs p-space-xs"
+          className="hidden md:flex items-center gap-space-xs p-space-xs lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2"
           aria-label="Main navigation"
         >
           {navigation.map(({ label, to }) => (
@@ -48,7 +48,7 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <div className="flex items-center gap-space-sm">
+        <div className="flex items-center gap-space-sm sm:mr-2 lg:mr-4">
           <Link
             className="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-secondary-container text-primary font-headline-sm text-label-md hover:brightness-105 active:scale-95 transition-all shadow-[0_8px_20px_rgba(254,152,50,0.28)]"
             to="/contact"
