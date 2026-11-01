@@ -557,15 +557,14 @@ export default function ContactPage() {
 
 <div className="lg:col-span-7">
 <div className="bg-surface-container-lowest/95 backdrop-blur-2xl rounded-2xl p-space-md md:p-space-lg shadow-2xl relative">
-
-<div className="absolute top-space-md right-space-md hidden sm:flex" aria-hidden="true">
-<span className="relative flex h-3 w-3">
-  <span className="absolute inline-flex h-full w-full rounded-full bg-secondary-container animate-ping"></span>
-  <span className="relative inline-flex h-3 w-3 rounded-full bg-secondary-container"></span>
-</span>
-</div>
 <div className="mb-space-md">
-<span className="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wide">Project Feasibility &amp; Briefing</span>
+<span className="inline-flex items-center gap-2 font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wide">
+  <span className="relative flex h-3 w-3" aria-hidden="true">
+    <span className="absolute inline-flex h-full w-full rounded-full bg-secondary-container animate-ping"></span>
+    <span className="relative inline-flex h-3 w-3 rounded-full bg-secondary-container"></span>
+  </span>
+  Project Feasibility &amp; Briefing
+</span>
 <h2 className="font-headline-lg text-headline-lg text-primary mt-1">Tell us about your ICP target.</h2>
 <p className="font-body-md text-body-md text-on-surface-variant mt-1">
                 Provide basic details on your ICP and revenue goals. We’ll review account feasibility before we get on the phone.

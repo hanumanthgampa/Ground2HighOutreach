@@ -1,10 +1,6 @@
-import { useState } from "react";
-
 import { Link } from "react-router-dom";
 
 export default function ServicesPage() {
-  const [activeFilter, setActiveFilter] = useState("all");
-
   return (
     <main className="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
       <div className="flex flex-col w-full">
@@ -67,7 +63,7 @@ export default function ServicesPage() {
 
 <section className="px-gutter py-space-xl max-w-7xl mx-auto w-full flex flex-col gap-space-xl">
 
-<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300" data-service-pillar="outbound" hidden={activeFilter !== "all" && activeFilter !== "outbound"}>
+<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300">
 <div className="absolute top-0 left-0 w-1.5 h-full bg-secondary-container"></div>
 
 <div className="lg:w-7/12 flex flex-col justify-between gap-space-md">
@@ -125,10 +121,12 @@ export default function ServicesPage() {
 <div className="pt-space-xs border-t border-outline-variant/10">
 <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Exact Deliverables Included:</p>
 <div className="flex flex-wrap gap-2">
-<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">500–1,500 Verified Decision-Makers / Mo</span>
-<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Dedicated Cold Inboxes &amp; DNS Setup</span>
-<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Bi-Weekly Angle Re-scripting</span>
-<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Spam Trap &amp; Bounce Auditing</span>
+<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">500–1,500 Targeted Decision-Makers / Month</span>
+<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Verified B2B Contact Data</span>
+<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Personalized Multichannel Outreach</span>
+<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">BANT-Based Lead Qualification</span>
+<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Qualified Sales Meetings</span>
+<span className="px-space-xs py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm">Email Deliverability &amp; Campaign Optimization</span>
 </div>
 </div>
 </div>
@@ -204,7 +202,7 @@ export default function ServicesPage() {
 </div>
 </div>
 
-<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300" data-service-pillar="qualification" hidden={activeFilter !== "all" && activeFilter !== "qualification"}>
+<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300">
 <div className="absolute top-0 left-0 w-1.5 h-full bg-on-tertiary-container"></div>
 
 <div className="lg:w-5/12 flex flex-col justify-between bg-surface-container-high rounded-xl p-space-md border border-outline-variant/20 order-2 lg:order-1">
@@ -299,7 +297,7 @@ export default function ServicesPage() {
 </div>
 </div>
 
-<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300" data-service-pillar="analytics" hidden={activeFilter !== "all" && activeFilter !== "analytics"}>
+<div className="flex flex-col lg:flex-row gap-space-lg items-stretch bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/15 relative overflow-hidden transition-all duration-300">
 <div className="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
 
 <div className="lg:w-7/12 flex flex-col justify-between gap-space-md">
@@ -425,66 +423,59 @@ export default function ServicesPage() {
 <div className="max-w-7xl mx-auto w-full">
 <div className="text-center max-w-2xl mx-auto mb-space-lg space-y-space-xs">
 <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm uppercase tracking-wider">
-<span className="material-symbols-outlined text-[16px]">sync_alt</span>
-          PLUG-AND-PLAY INTEGRATION
+<span className="material-symbols-outlined text-[16px]">auto_awesome</span>
+          AI-ASSISTED CAMPAIGN MANAGEMENT
         </div>
 <h2 className="font-headline-xl text-headline-xl text-primary tracking-tight">
-          Works seamlessly with your existing revenue stack.
+          Smarter campaign decisions. More human conversations.
         </h2>
 <p className="font-body-md text-body-md text-on-surface-variant">
-          No new complex platforms to learn. We pipe verified meetings, contact intelligence, and conversation transcripts directly into your native tools.
+          We use AI as a practical aid across campaign research, messaging, and performance review—helping our team work with better context while people stay in control of strategy and outreach.
         </p>
 </div>
 
-<div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-space-sm">
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-primary text-[26px]">cloud</span>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+<div className="w-12 h-12 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center mb-space-sm">
+<span className="material-symbols-outlined text-[26px]" aria-hidden="true">travel_explore</span>
 </div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">Salesforce</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Bi-directional CRM</span>
+<h3 className="font-headline-sm text-headline-sm text-primary">Research with better context</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1">AI-assisted research helps organize account and prospect information so the team can focus on relevant decision-makers.</p>
 </div>
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-secondary text-[26px]">hub</span>
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-sm">
+<span className="material-symbols-outlined text-primary text-[26px]" aria-hidden="true">person_search</span>
 </div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">HubSpot</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Custom Stage Sync</span>
+<h3 className="font-headline-sm text-headline-sm text-primary">Sharper audience focus</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Use available campaign and account signals to help prioritize high-fit prospects and refine audience segments.</p>
 </div>
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-on-tertiary-container text-[26px]">forward_to_inbox</span>
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+<div className="w-12 h-12 rounded-full bg-tertiary-container/15 text-on-tertiary-container flex items-center justify-center mb-space-sm">
+<span className="material-symbols-outlined text-[26px]" aria-hidden="true">edit_note</span>
 </div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">Salesloft</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Cadence Handover</span>
+<h3 className="font-headline-sm text-headline-sm text-primary">Personalization with purpose</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1">AI can help generate message ideas and variations; our team reviews and tailors the final outreach to each audience.</p>
 </div>
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-primary text-[26px]">campaign</span>
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-sm">
+<span className="material-symbols-outlined text-secondary text-[26px]" aria-hidden="true">query_stats</span>
 </div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">Outreach</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Workflow Routing</span>
+<h3 className="font-headline-sm text-headline-sm text-primary">Campaign insights that guide action</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Review response patterns and campaign performance to spot what resonates and where to improve next.</p>
 </div>
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-secondary text-[26px]">rocket_launch</span>
+<div className="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+<div className="w-12 h-12 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center mb-space-sm">
+<span className="material-symbols-outlined text-[26px]" aria-hidden="true">alt_route</span>
 </div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">Apollo</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Verified Sourcing</span>
+<h3 className="font-headline-sm text-headline-sm text-primary">More efficient campaign workflows</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Use automation to support repetitive campaign tasks, giving the team more time for thoughtful prospect engagement.</p>
 </div>
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-on-tertiary-container text-[26px]">chat</span>
+<div className="p-space-md rounded-xl bg-primary text-on-primary shadow-sm">
+<div className="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center mb-space-sm">
+<span className="material-symbols-outlined text-[26px]" aria-hidden="true">verified_user</span>
 </div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">Slack</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Realtime Lead Alerts</span>
-</div>
-<div className="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all group">
-<div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-primary text-[26px]">database</span>
-</div>
-<span className="font-headline-sm text-headline-sm text-primary text-center">ZoomInfo</span>
-<span className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Org Chart Depth</span>
+<h3 className="font-headline-sm text-headline-sm text-surface">Human-led, AI-assisted</h3>
+<p className="font-body-sm text-body-sm text-on-primary-container mt-1">AI supports the process; our people make the final decisions and check outreach for relevance and quality.</p>
 </div>
 </div>
 </div>
