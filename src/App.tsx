@@ -64,11 +64,14 @@ export default function App() {
       "content",
       metadata.description,
     );
+    const canonicalUrl = new URL(pathname, "https://www.g2houtreach.com/").href;
+    const canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    canonicalLink?.setAttribute("href", canonicalUrl);
     const openGraphUrl =
       document.querySelector<HTMLMetaElement>('meta[property="og:url"]') ??
       document.createElement("meta");
     openGraphUrl.setAttribute("property", "og:url");
-    openGraphUrl.content = new URL(pathname, window.location.origin).href;
+    openGraphUrl.content = canonicalUrl;
     if (!openGraphUrl.isConnected) document.head.append(openGraphUrl);
     document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')?.setAttribute(
       "content",

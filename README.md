@@ -24,8 +24,9 @@ npm run preview
 Routes: `/`, `/services`, `/approach`, and `/contact`.
 
 The production build lazy-loads secondary page routes, uses optimized WebP imagery,
-and includes page-specific titles and descriptions plus Open Graph metadata. Set the
-final site domain before adding canonical URLs and a sitemap for search indexing.
+and includes page-specific titles and descriptions plus Open Graph metadata. SEO
+canonical URLs, structured data, robots.txt, and the sitemap use
+`https://www.g2houtreach.com/`, the canonical production domain.
 
 ## Deployment
 
